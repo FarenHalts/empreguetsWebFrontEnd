@@ -1,0 +1,111 @@
+@font-face {
+    font-family: LobsterRegular;
+    src: url("../fonts/lobster/Lobster-Regular.ttf") format("OpenType");
+  }
+@font-face {
+    font-family: RobotoBold;
+    src: url("../fonts/roboto/Roboto-Bold.ttf") format("OpenType");
+  }
+@font-face {
+    font-family: RobotoRegular;
+    src: url("../fonts/roboto/Roboto-Regular.ttf") format("OpenType");
+  }
+  
+
+body{
+    background-color: #725ab0 !important;
+}
+
+.boxLogin{
+    width: 30%;
+    height: 55%;
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+    box-shadow: 0 0 71px -10px #000;
+}
+
+.headerLogin{
+    color: #f0f0f0;
+    font-family: LobsterRegular;
+    font-size: 55px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.tipoLogin{
+    text-align: center;
+    padding-top: 15px;
+}
+
+.loginTextType{
+    font-size: 14px;
+    color: #f0f0f0;
+    font-family: RobotoRegular;
+}
+
+.el-radio-button__orig-radio:checked+.el-radio-button__inner{
+    background-color: #f0f0f0 !important;
+    border-color: unset !important;
+    color: #725ab0 !important;
+    box-shadow: unset !important;
+}
+
+.el-radio-button__inner{
+    background-color: #725ab0 !important;
+    color: #f0f0f0 !important;
+}
+
+.el-radio-button:focus:not(.is-focus):not(:active):not(.is-disabled){
+    box-shadow: unset !important;
+}
+
+.infosLogin{
+    text-align: center;
+}
+
+.el-form-item__label{
+    color: #f0f0f0 !important;
+    line-height: 6px !important;
+    font-family: RobotoRegular;
+}
+
+.el-form-item.is-required:not(.is-no-asterisk) .el-form-item__label-wrap>.el-form-item__label:before, .el-form-item.is-required:not(.is-no-asterisk)>.el-form-item__label:before{
+    content: unset !important;
+}
+
+.el-input__inner{
+    background-color: unset !important;
+    color: #f0f0f0 !important;
+}
+
+.el-radio-button__inner, .el-radio-group{
+    line-height: 0.8;
+}
+
+.el-button--primary{
+    background-color: unset !important;
+    border-color: #f0f0f0 !important;
+    color: #f0f0f0;
+}
+
+button:focus{
+    outline: unset !important;
+}
+
+.el-form-item{
+    margin-bottom: 22px !important;
+}
+
+.infosAbaixoLogin{
+    font-size: 11px;
+    font-family: RobotoRegular;
+    color: #f0f0f0;
+}
+
+.el-form-item__error{
+    padding-top: 2px !important;
+}
