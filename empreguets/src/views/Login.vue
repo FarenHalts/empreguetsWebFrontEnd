@@ -72,16 +72,22 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            this.setLogged()
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+      setLogged(){
+          this.$store.commit("SET_LOGGED", true);
+          console.log(this.$store.getters.logged);
       }
+    },
+    mounted() {
+        console.log(this.$store.getters.logged);
     }
     
 }
