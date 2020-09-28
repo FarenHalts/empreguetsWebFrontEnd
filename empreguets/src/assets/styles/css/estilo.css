@@ -27,6 +27,36 @@ body{
 	margin: auto;
     box-shadow: 0 0 71px -10px #000;
 }
+@media screen and (min-width: 1600px) {
+    .boxLogin{
+      width: 30% !important;
+    }
+  }
+@media screen and (max-width: 1599px) {
+    .boxLogin{
+      width: 40% !important;
+    }
+  }
+@media screen and (max-width: 1200px) {
+    .boxLogin{
+      width: 50% !important;
+    }
+  }
+@media screen and (max-width: 980px) {
+    .boxLogin{
+      width: 60% !important;
+    }
+  }
+@media screen and (max-width: 800px) {
+    .boxLogin{
+      width: 70% !important;
+    }
+  }
+@media screen and (max-width: 650px) {
+    .boxLogin{
+      width: 90% !important;
+    }
+  }
 
 .headerLogin{
     color: #f0f0f0;

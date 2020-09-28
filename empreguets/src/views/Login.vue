@@ -12,8 +12,8 @@
     </div>
 
     <div class="container" style="padding-top: 15px;">
-        <div class="row justify-content-md-center">
-            <div class="col-md-auto col-xl-7">
+        <div class="row justify-content-center">
+            <div class="col-10 col-sm-8 col-md-8 col-lg-8 col-xl-7">
                 <div class="infosLogin">
                     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
                         <el-form-item label="Usuário" prop="name">
@@ -26,8 +26,8 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-md-center" style="padding-top: 10px;">
-            <div class="col-md-auto col-xl-5">
+        <div class="row justify-content-center" style="padding-top: 10px;">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-5">
                 <div class="infosLogin">
                     <el-button style="width: 100%" type="primary" @click="submitForm('ruleForm')">Login<i class="el-icon-right" style="padding-left: 10px;"></i></el-button>
                 </div>
