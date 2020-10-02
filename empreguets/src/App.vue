@@ -5,8 +5,29 @@
       <router-link to="/about">About</router-link> -->
     </div>
     <router-view/>
+    <h1>voce nao tem acesso</h1>
   </div>
 </template>
+<script>
+export default {
+  data(){
 
+  },
+  created(){
+    this.checkLogged();
+  },
+  mounted(){
+    this.checkLoggedMounted();
+  },
+  methods:{
+    checkLogged(){
+        console.log('chamando o app pelo created');
+      },
+    checkLoggedMounted(){
+        console.log('chamando o app pelo mounted');
+      },
+    }
+  }
+</script>
 <style>
 </style>

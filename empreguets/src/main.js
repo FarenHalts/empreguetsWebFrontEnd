@@ -29,5 +29,16 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+
+  created(){
+    this.logMain()
+  },
+
+methods:{
+  logMain(){
+    console.log('carregando a main');
+  }
+},
+
   render: h => h(App)
 }).$mount('#app')

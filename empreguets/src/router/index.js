@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import TelaInicial from '../views/telainicial/TelaInicial.vue'
-import Login from '../views/Login.vue'
+import Login from '../views/login/Login.vue'
 import store from '../store/index.js'
 
 Vue.use(VueRouter)
@@ -25,10 +25,16 @@ const routes = [
     component: Login
   },
   {
-    path: '/',
+    path: '*',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home,
     beforeEnter: (to, from, next) => {
+      console.log('chamando a rota');
       if (store.getters.logged == false) {
         next("/login");
       } else {
