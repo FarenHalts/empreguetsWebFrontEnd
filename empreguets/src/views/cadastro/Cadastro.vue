@@ -193,7 +193,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.$router.push('/home')
+                    this.$router.push('/telainicial')
                     console.log('to funfando');
                     // this.setLogged()
                 } else {
