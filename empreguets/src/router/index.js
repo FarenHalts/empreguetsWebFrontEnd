@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import TelaInicial from '../views/telainicial/TelaInicial.vue'
 import Login from '../views/login/Login.vue'
+import Cadastro from '../views/cadastro/Cadastro.vue'
 import store from '../store/index.js'
 
 Vue.use(VueRouter)
@@ -25,6 +26,11 @@ const routes = [
     component: Login
   },
   {
+    path: '/cadastro',
+    name: 'Cadastro',
+    component: Cadastro
+  },
+  {
     path: '*',
     name: 'Login',
     component: Login
@@ -33,14 +39,14 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
-    beforeEnter: (to, from, next) => {
-      console.log('chamando a rota');
-      if (store.getters.logged == false) {
-        next("/login");
-      } else {
-        next();
-      }
-    }
+    // beforeEnter: (to, from, next) => {
+    //   console.log('chamando a rota');
+    //   if (store.getters.logged == false) {
+    //     next("/login");
+    //   } else {
+    //     next();
+    //   }
+    // }
   },
   {
     path: '/about',

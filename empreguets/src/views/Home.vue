@@ -16,4 +16,9 @@ export default {
     HelloWorld
   }
 }
+  beforeRouteEnter (to, from, next) {
+      console.log('teste');
+      next();
+    }
+
 </script>

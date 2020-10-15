@@ -5,7 +5,6 @@
       <router-link to="/about">About</router-link> -->
     </div>
     <router-view/>
-    <h1>voce nao tem acesso</h1>
   </div>
 </template>
 <script>

@@ -21,6 +21,9 @@ Vue.use(ElementUI, {locale});
 
 import "bootstrap/dist/css/bootstrap.css";
 
+import VueTheMask from 'vue-the-mask';
+Vue.use(VueTheMask)
+
 //fim import bootstrap
 
 
