@@ -23,7 +23,10 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import VueTheMask from 'vue-the-mask';
 Vue.use(VueTheMask)
-
+let loadingInstance = Loading.service({
+  lock: true,
+  fullscreen: true
+});
 //fim import bootstrap
 
 
@@ -41,6 +44,9 @@ methods:{
   logMain(){
     console.log('carregando a main');
   }
+},
+mounted() {
+  loadingInstance.close();
 },
 
   render: h => h(App)

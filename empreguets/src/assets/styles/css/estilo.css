@@ -151,22 +151,9 @@ button:focus{
     padding-top: 2px !important;
 }
 
-.el-avatar{
-  box-sizing: border-box;
-    text-align: center;
-    color: #fff;
-    background: #C0C4CC;
-    width: 100px !important;
-    height: 100px !important;
-    border-radius: 100%;
-    line-height: 40px;
-    font-size: 14px;
-    position: absolute;
-    left: 165px;
-    border: 2px solid !important;
-    bottom: 135px;
+.roundedAvatar{
+  margin: 20px 20px 0px 0px;
 }
-
-.el-avatar .img{
-  width: 100%;
+.roundedAvatar img{
+  border-radius: 50px;
 }
