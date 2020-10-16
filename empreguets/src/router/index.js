@@ -33,8 +33,8 @@ const routes = [
   },
   {
     path: '*',
-    name: 'Login',
-    component: Login
+    name: 'telainicial',
+    component: TelaInicial
   },
   {
     path: '/home',
