@@ -30,7 +30,7 @@
             <el-form-item class="col-xl-6" label="Endereço" prop="endereco">
                 <el-input v-model="ruleForm.endereco"></el-input>
             </el-form-item>
-            <el-form-item class="col-xl-3" label="Numero da Residência" prop="numeroEndereco">
+            <el-form-item class="col-xl-3" label="Número" prop="numeroEndereco">
                 <el-input v-model="ruleForm.numeroEndereco"></el-input>
             </el-form-item>
             <el-form-item class="col-xl-4" label="Cidade" prop="cidade">

@@ -157,3 +157,28 @@ button:focus{
 .roundedAvatar img{
   border-radius: 50px;
 }
+.header{
+  color: #f0f0f0;
+  font-family: LobsterRegular;
+  font-size: 30px;
+  padding-top: 4px;
+  padding-left: 10px;
+}
+.el-card__body {
+  padding: 5px !important;
+}
+.el-card {
+  border: unset !important;
+  background-color: #383838 !important;
+  color: #f0f0f0 !important;
+  transition: .3s;
+}
+/* .el-rate__icon{
+  color: #383838 !important;
+} */
+.el-rate__item{
+  margin-right: -5px !important;
+}
+.el-card__body{
+  cursor: pointer;
+}

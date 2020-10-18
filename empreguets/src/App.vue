@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> -->
+    <div style="background-color: #383838; height: 55px;">
+      <div class="header">Empreguets
+    </div>
     </div>
     <router-view/>
   </div>
