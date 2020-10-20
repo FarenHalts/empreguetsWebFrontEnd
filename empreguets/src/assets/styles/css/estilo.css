@@ -182,3 +182,15 @@ button:focus{
 .el-card__body{
   cursor: pointer;
 }
+
+.title{
+    font-family: LobsterRegular;
+    font-size: 30px;
+    color: #f0f0f0;
+    padding-top: 50px;
+}
+
+ .localizacao .el-input.is-active .el-input__inner, .el-input__inner:focus {
+  border-color: unset !important;
+  outline: 0;
+}

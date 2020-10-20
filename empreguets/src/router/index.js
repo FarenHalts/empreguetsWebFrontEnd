@@ -8,6 +8,7 @@ import Login from '../views/login/Login.vue'
 import Cadastro from '../views/cadastro/Cadastro.vue'
 import homeScreen from '../views/homeScreen/homeScreen.vue'
 import Perfil from '../views/perfil/perfil.vue'
+import Localizacao from '../views/localizacao/localizacao.vue'
 
 Vue.use(VueRouter)
 
@@ -60,6 +61,11 @@ const routes = [
     path: '/perfil',
     name: 'Perfil',
     component: Perfil,
+  },
+  {
+    path: '/localizacao',
+    name: 'Localizacao',
+    component: Localizacao,
   },
   {
     path: '/about',

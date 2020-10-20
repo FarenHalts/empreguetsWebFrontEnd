@@ -13,6 +13,15 @@ import "element-ui/lib/theme-chalk/index.css";
 import ElementUI from "element-ui";
 import { Loading } from "element-ui";
 
+import * as VueGoogleMaps from 'vue2-google-maps'
+ 
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyCNrxN9zZ7VEth5FH7jWSzpHg8tBeuknBM',
+    libraries: 'places',
+  },
+})
+
 Vue.use(ElementUI, {locale});
 
 //fim importação Element

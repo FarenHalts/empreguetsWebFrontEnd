@@ -8,8 +8,7 @@
                 <div style="padding: 14px;">
                     <div class="row" style="justify-content: space-between; padding: 0px 2px;">
                         <h3 class="titleCards">Edina Soares</h3>
-                        <el-rate v-model="value" disabled disabled-void-color="#f0f0f0"
-                        :colors="colors">
+                        <el-rate v-model="value" disabled disabled-void-color="#f0f0f0" :colors="colors">
                         </el-rate>
                     </div>
                     <div class="row" style="justify-content: space-between; padding: 0px 2px;">
@@ -20,7 +19,10 @@
             </el-card>
         </div>
     </div>
-    <h1 class="bestRatings">Pesquise também por prestadores próximos a você</h1>
+    <div class="searchAroundDiv">
+        <span class="searchAround" @click="$router.push('/localizacao')">Pesquise também por prestadores próximos a você</span>
+
+    </div>
     <h1 class="bestRatings">Demais Prestadores em Curitiba</h1>
     <div class="row form-row" style="justify-content: center; margin-bottom: 5%; margin-right: 0px !important;">
         <div v-for="(o) in 12" :key="o">
@@ -29,8 +31,7 @@
                 <div style="padding: 14px;">
                     <div class="row" style="justify-content: space-between; padding: 0px 2px;">
                         <h3 class="titleCards">Edina Soares</h3>
-                        <el-rate v-model="value" disabled disabled-void-color="#f0f0f0"
-                        :colors="colors">
+                        <el-rate v-model="value" disabled disabled-void-color="#f0f0f0" :colors="colors">
                         </el-rate>
                     </div>
                     <div class="row" style="justify-content: space-between; padding: 0px 2px;">
@@ -52,8 +53,8 @@ export default {
                 nome: 'oi',
                 idade: 2,
             },
-                value: 4,
-                colors: ['#FFC857', ' #FFC857', ' #FFC857']
+            value: 3.5,
+            colors: ['#FFC857', ' #FFC857', ' #FFC857']
         }
     }
 }
@@ -70,6 +71,7 @@ export default {
     color: #f0f0f0;
     padding-top: 50px;
 }
+
 .image {
     width: 100%;
     display: block;
@@ -85,10 +87,22 @@ export default {
     color: #f0f0f0;
     padding-left: 5px;
 }
+
 .subTitleCards {
     font-family: LobsterRegular;
     font-size: 16px;
     color: #f0f0f0;
     padding-left: 5px;
+}
+
+.searchAroundDiv {
+    margin-top: 50px
+}
+
+.searchAround {
+    cursor: pointer;
+    font-family: LobsterRegular;
+    font-size: 30px;
+    color: #f0f0f0;
 }
 </style>
