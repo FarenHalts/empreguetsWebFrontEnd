@@ -5,7 +5,7 @@
             <h1 class="title text-center">Pesquisar por prestadores de serviço próximos a sua localização</h1>
         </div>
         <div class="row justify-content-center pt-4">
-            <div class="col-4">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-5">
                 <el-input placeholder="Digite a região" v-model="search" suffix-icon="el-icon-search"></el-input>
             </div>
         </div>

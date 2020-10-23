@@ -1,7 +1,10 @@
 <template>
 <div class="home">
+    <div class="container-fluid">
+
+    
     <h1 class="bestRatings">Prestadores melhores avaliados de Curitiba</h1>
-    <div class="row" style="justify-content: center; width: 100%; margin-right: 0px !important;">
+    <div class="row" style="justify-content: center; ">
         <div v-for="(o) in 4" :key="o">
             <el-card class="cards" @click.native="$router.push('/perfil')">
                 <img src="./unnamed.png" class="image">
@@ -24,7 +27,7 @@
 
     </div>
     <h1 class="bestRatings">Demais Prestadores em Curitiba</h1>
-    <div class="row form-row" style="justify-content: center; margin-bottom: 5%; margin-right: 0px !important;">
+    <div class="row" style="justify-content: center; margin-bottom: 5%;">
         <div v-for="(o) in 12" :key="o">
             <el-card class="cards" @click.native="$router.push('/perfil')">
                 <img src="./unnamed.png" class="image">
@@ -41,6 +44,7 @@
                 </div>
             </el-card>
         </div>
+    </div>
     </div>
 </div>
 </template>

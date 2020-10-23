@@ -59,14 +59,14 @@ export default {
                 name: '',
                 senha: ''
             },
-             rules: {
-            name: [
-                { required: true, message: 'Por favor, insira um nome de usuário válido.', trigger: 'blur' },
-            ],
-            senha: [
-                { required: true, message: 'Por favor, insira uma senha válida.', trigger: 'blur' },
-            ],
-            }
+            //  rules: {
+            // name: [
+            //     { required: true, message: 'Por favor, insira um nome de usuário válido.', trigger: 'blur' },
+            // ],
+            // senha: [
+            //     { required: true, message: 'Por favor, insira uma senha válida.', trigger: 'blur' },
+            // ],
+            // }
         }
         
     },
@@ -74,6 +74,7 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+              this.$router.push('/home')
               this.loginzinho();
             // this.requestLogin()
             // this.setLogged()
@@ -113,7 +114,7 @@ export default {
                 }
             }).then(res => {
             let asd = res.data.data;
-            this.$router.push('/telainicial')
+            this.$router.push('/home')
             console.log(asd);
             console.log('aaaaaaa');
         }).catch(err => {
