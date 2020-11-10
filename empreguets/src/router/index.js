@@ -9,6 +9,7 @@ import Cadastro from '../views/cadastro/Cadastro.vue'
 import homeScreen from '../views/homeScreen/homeScreen.vue'
 import Perfil from '../views/perfil/perfil.vue'
 import Localizacao from '../views/localizacao/localizacao.vue'
+import Grafico from '../views/grafico/Pie.vue'
 
 Vue.use(VueRouter)
 
@@ -66,6 +67,11 @@ const routes = [
     path: '/localizacao',
     name: 'Localizacao',
     component: Localizacao,
+  },
+  {
+    path: '/grafico',
+    name: 'Grafico',
+    component: Grafico,
   },
   {
     path: '/about',
