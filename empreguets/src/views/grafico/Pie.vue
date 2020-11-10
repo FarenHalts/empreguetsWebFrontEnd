@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h1 class="titleGraphs">Prestadores melhores avaliados de Curitiba</h1>
+    <h1 class="titleGraphs">Gráfico dos status de serviços</h1>
     <div class="row justify-content-center" style="padding-top: 50px;">
         <div>
             <pie-chart></pie-chart>
