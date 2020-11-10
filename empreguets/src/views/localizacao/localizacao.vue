@@ -12,7 +12,7 @@
         <div class="row justify-content-center" style="padding-top: 50px">
             <GmapMap
                 class="mapStyle"
-                :center="{lat:-25.5065, lng:-49.2641}"
+                :center="{lat:-25.4734387, lng:-49.2856119}"
                 :zoom="14"
                 map-type-id="roadmap"
                 >
@@ -35,14 +35,28 @@ export default {
         return {
             search: ''
         }
-    }
+    },
+     data () {
+     return {
+
+             center: {lat: -25.5593155, lng:-49.2831202},
+             markers:[{
+                position: {lat:-25.4689699, lng:-49.351632}
+                },{
+                position :
+                    {lat:-25.5593155, lng:-49.2831202}
+            }]
+        }
+    },
+
+
 }
 </script>
 
 <style scoped>
 .mapStyle{
-       width: 600px;
-    height: 400px;
+       width: 800px;
+    height: 600px;
     border: 6px solid white;
     border-radius: 8px;
 }
