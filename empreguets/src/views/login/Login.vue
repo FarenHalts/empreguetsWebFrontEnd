@@ -59,14 +59,14 @@ export default {
                 name: '',
                 senha: ''
             },
-            //  rules: {
-            // name: [
-            //     { required: true, message: 'Por favor, insira um nome de usuário válido.', trigger: 'blur' },
-            // ],
-            // senha: [
-            //     { required: true, message: 'Por favor, insira uma senha válida.', trigger: 'blur' },
-            // ],
-            // }
+             rules: {
+            name: [
+                { required: true, message: 'Por favor, insira um nome de usuário válido.', trigger: 'blur' },
+            ],
+            senha: [
+                { required: true, message: 'Por favor, insira uma senha válida.', trigger: 'blur' },
+            ],
+            }
         }
         
     },

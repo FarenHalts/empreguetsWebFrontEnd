@@ -180,78 +180,83 @@ export default {
                 email: '',
                 senha: '',
             },
-            // rules: {
-            //     nome: [{
-            //         required: true,
-            //         message: 'Nome inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     cpf: [{
-            //         required: true,
-            //         message: 'CPF inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     email: [{
-            //         required: true,
-            //         message: 'E-mail inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     rg: [{
-            //         required: true,
-            //         message: 'RG inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     datanascimento: [{
-            //         required: true,
-            //         message: 'Data de Nascimento inválida.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     telefone: [{
-            //         required: true,
-            //         message: 'Número inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     cep: [{
-            //         required: true,
-            //         message: 'CEP inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     endereco: [{
-            //         required: true,
-            //         message: 'Endereço inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     numeroEndereco: [{
-            //         required: true,
-            //         message: 'Número inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     complemento: [{
-            //         required: false,
-            //         message: 'Número inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     cidade: [{
-            //         required: true,
-            //         message: 'Cidade inválida.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     bairro: [{
-            //         required: true,
-            //         message: 'Bairro inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     valor: [{
-            //         required: true,
-            //         message: 'Valor inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            //     raio: [{
-            //         required: true,
-            //         message: 'Raio inválido.',
-            //         trigger: 'blur'
-            //     }, ],
-            // }
+            rules: {
+                nome: [{
+                    required: true,
+                    message: 'Nome inválido.',
+                    trigger: 'blur'
+                }, ],
+                cpf: [{
+                    required: true,
+                    message: 'CPF inválido.',
+                    trigger: 'blur'
+                }, ],
+                email: [{
+                    required: true,
+                    message: 'E-mail inválido.',
+                    trigger: 'blur'
+                }, ],
+                senha: [{
+                    required: true,
+                    message: 'Senha inválido.',
+                    trigger: 'blur'
+                }, ],
+                rg: [{
+                    required: true,
+                    message: 'RG inválido.',
+                    trigger: 'blur'
+                }, ],
+                datanascimento: [{
+                    required: true,
+                    message: 'Data de Nascimento inválida.',
+                    trigger: 'blur'
+                }, ],
+                telefone: [{
+                    required: true,
+                    message: 'Número inválido.',
+                    trigger: 'blur'
+                }, ],
+                cep: [{
+                    required: true,
+                    message: 'CEP inválido.',
+                    trigger: 'blur'
+                }, ],
+                endereco: [{
+                    required: true,
+                    message: 'Endereço inválido.',
+                    trigger: 'blur'
+                }, ],
+                numeroEndereco: [{
+                    required: true,
+                    message: 'Número inválido.',
+                    trigger: 'blur'
+                }, ],
+                complemento: [{
+                    required: false,
+                    message: 'Número inválido.',
+                    trigger: 'blur'
+                }, ],
+                cidade: [{
+                    required: true,
+                    message: 'Cidade inválida.',
+                    trigger: 'blur'
+                }, ],
+                bairro: [{
+                    required: true,
+                    message: 'Bairro inválido.',
+                    trigger: 'blur'
+                }, ],
+                valor: [{
+                    required: true,
+                    message: 'Valor inválido.',
+                    trigger: 'blur'
+                }, ],
+                raio: [{
+                    required: true,
+                    message: 'Raio inválido.',
+                    trigger: 'blur'
+                }, ],
+            }
         }
     },
     methods: {
