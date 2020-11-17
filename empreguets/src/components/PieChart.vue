@@ -38,14 +38,19 @@ export default {
     mounted() {
         this.renderChart(this.chartData, this.options)
         api.getGraphicData()
-            .then(response => {
+            .then((response) => {
                 if (response.status == "SUCCESS") {
-                    console.log(response);
                     this.chartData.datasets[0].data[0] = response.data.completed
                     this.chartData.datasets[0].data[1] = response.data.pendings
                     this.chartData.datasets[0].data[2] = response.data.reports
                     this.$data._chart.update()
                 }
+            }) 
+            .catch((err) =>{
+                if (err.response.status == 403) {
+                    console.log('vaza do meu sistema');
+                }
+                console.log('err', err.response);
             })
     },
 }
