@@ -1,13 +1,8 @@
 import axios from 'axios';
 
-export default class AppApi {
+export default class Api{
 
-    static async checkLogin(obj) {
-        try {
-            const response = await axios.post(`http://localhost:5000/users/login`, obj)
-            return response.data
-        } catch (err) {
-            console.error('Ocorreu um erro na API')
-        }
+    static async login(data){
+        return await axios.post(`${process.env.VUE_APP_BASEURL}/login`, data)
     }
 }

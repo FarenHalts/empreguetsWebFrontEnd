@@ -38,10 +38,8 @@
             <h3 class="infosAbaixoLogin">Esqueci a senha</h3>
         </div>
 
-        
     </div>
 </div>
-    
 </template>
 
 <style>
@@ -49,86 +47,80 @@
 </style>
 
 <script>
-import api from './loginService'
+import Api from './loginService'
 import axios from 'axios'
 export default {
-    data(){
-        return{
+    data() {
+        return {
             tipoLogin: 'Prestador',
             ruleForm: {
                 name: '',
                 senha: ''
             },
-             rules: {
-            name: [
-                { required: true, message: 'Por favor, insira um nome de usuário válido.', trigger: 'blur' },
-            ],
-            senha: [
-                { required: true, message: 'Por favor, insira uma senha válida.', trigger: 'blur' },
-            ],
+            rules: {
+                name: [{
+                    required: true,
+                    message: 'Por favor, insira um nome de usuário válido.',
+                    trigger: 'blur'
+                }, ],
+                senha: [{
+                    required: true,
+                    message: 'Por favor, insira uma senha válida.',
+                    trigger: 'blur'
+                }, ],
             }
         }
-        
+
     },
     methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-              this.$router.push('/home')
-              this.loginzinho();
-            // this.requestLogin()
-            // this.setLogged()
-          } else {
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-      requestLogin() {
-          let obj = {
-              email: this.ruleForm.name,
-              password: this.ruleForm.senha
-          }
-        api.checkLogin(obj)
-          .then((resposta) => {
-            if (resposta) {
-                localStorage.setItem('token', resposta)
-                let token = localStorage.getItem("token")
-                this.$store.commit("SET_LOGGED", true);
-                this.$router.push({
-                path: "/home"
-            });
-            }
-          })
-          .catch((erro) => {});
-      },
-      loginzinho() {
-        axios.get('https://hom.roit.ai/roit-people-analytics/api/v1/reports/closing-register/202008',
-
-            {
-                headers: {
-                    Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXIiOiJVMkZzZEdWa1gxOFA5YlMwcFFFSkNKSFk2V2ZCdUFUdmZBdVAwWjF2dUU2Vi9WNE5xRTlINmU0TGhtVlRYbjAzbHZQTWc5TVhYWm5VTDVWOElqUkZ5cDJ2ck10a0o5dnZ2SVZjWWx1ZStFQ3NkTWtjblJ5eEVkV1ZFWkkwVWRSWjNwQzA5K1NGZDlSa09pZkZqSlVMaUhEWGZHelZGRFpjRlZVTEFiVlN1UHFjQS9UUVdGQVJ6d3dOZjVMcTBMaVRhTFlIVTFNWXBQQXRYUFlEbExCL1ZDN2wxblJsV3hsMm80STFwM0JTOFVadGVjSjNJVVVlUjROK0xTWkJqZGplN3drNXZQdFpIbmQ1T1JjeGlVcEFZOFcwQ1JkOTVtSE0zZTdlV3FkU1U3ekU4aHl0OHdieFNNRW1ETEk2UlRMeWNLYnRveERNQWdGTFhLNHdvWG5KUU9BRUlSNG45YzhrVDRDMldINDBXOGNVemlrakZmUFFoT1oySGRFMkVKTWRjMTVtUG1BRHEzVFlGT2c1enpvbXh2TmxoTVhtVEZ3dFhDUVZ3SUZRZzBjSVhjZUZEcnp5Vmllc2J3aFIyci84MkVPWHE3WmFPS1hlbEpaZ3RVS2VveUYvZHlGWDcvT083TXJlV1dzZ3hGUWFHSXl6VG1YYy9yNzY0aGJCYUFoSSIsInByb3BhZ2F0ZUNhY2hlQ2xlYW51cCI6ZmFsc2V9LCJpYXQiOjE2MDI3MjgxNzAsImV4cCI6MTYwMjkwMDk3MH0.-kDW3fH0D_fm5rBaeYxejj6u77t0HfyV2FRB_f2BqAI',
-                    CustomerId: 'fCdCRhpbsjgUYN5zSlaShwKFlQeqUaleqUal'
+        submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.login(this.ruleForm)
+                    // this.requestLogin()
+                    // this.setLogged()
+                } else {
+                    return false;
                 }
-            }).then(res => {
-            let asd = res.data.data;
-            this.$router.push('/home')
-            console.log(asd);
-            console.log('aaaaaaa');
-        }).catch(err => {
-        })
-    }
-    //   setLogged(){
-    //       this.$store.commit("SET_LOGGED", true);
-    //       console.log(this.$store.getters.logged);
-    //   }
+            });
+        },
+        //   requestLogin() {
+        //       let obj = {
+        //           email: this.ruleForm.name,
+        //           password: this.ruleForm.senha
+        //       }
+        //     api.checkLogin(obj)
+        //       .then((resposta) => {
+        //         if (resposta) {
+        //             localStorage.setItem('token', resposta)
+        //             let token = localStorage.getItem("token")
+        //             this.$store.commit("SET_LOGGED", true);
+        //             this.$router.push({
+        //             path: "/home"
+        //         });
+        //         }
+        //       })
+        //       .catch((erro) => {});
+        //   },
+        login(form) {
+            let data = {
+                email: form.name,
+                senha: form.senha,
+            }
+            Api.login(data).then(response => {
+                if (response.data.status == 'SUCCESS') {
+                    this.$store.commit("SET_TOKEN", response.data.data);
+                    this.$router.push('/home')
+                    console.log('token', this.$store.getters.token);
+                }
+            }).catch(err => {
+                this.$message({
+                    message: err.response.data.message,
+                    type: "error",
+                });
+            })
+        }
     },
-    mounted() {
-        console.log(this.$store.getters.logged);
-    },
-    
-    
+
 }
 </script>
