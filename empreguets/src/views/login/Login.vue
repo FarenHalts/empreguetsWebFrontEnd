@@ -109,9 +109,10 @@ export default {
             }
             Api.login(data).then(response => {
                 if (response.data.status == 'SUCCESS') {
-                    this.$store.commit("SET_TOKEN", response.data.data);
-                    this.$router.push('/home')
-                    console.log('token', this.$store.getters.token);
+                    const token = response.data.data;
+                    localStorage.setItem('token', token);
+                    this.$store.commit("SET_TOKEN", token);
+                    this.$router.push('/home');
                 }
             }).catch(err => {
                 this.$message({
