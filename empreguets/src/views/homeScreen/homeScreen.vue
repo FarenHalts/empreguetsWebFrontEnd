@@ -1,19 +1,18 @@
 <template>
 <div class="home">
     <div class="container-fluid">
-
         <h1 class="bestRatings">Prestadores melhores avaliados de Curitiba</h1>
-        <div class="row" style="justify-content: center; ">
-            <div v-for="(o) in 4" :key="o">
+        <div class="row" style="justify-content: center">
+            <div v-for="o in 4" :key="o">
                 <el-card class="cards" @click.native="$router.push('/perfil')">
-                    <img src="./unnamed.png" class="image">
-                    <div style="padding: 14px;">
-                        <div class="row" style="justify-content: space-between; padding: 0px 2px;">
+                    <img src="./unnamed.png" class="image" />
+                    <div style="padding: 14px">
+                        <div class="row" style="justify-content: space-between; padding: 0px 2px">
                             <h3 class="titleCards">Edina Soares</h3>
                             <el-rate v-model="value" disabled disabled-void-color="#f0f0f0" :colors="colors">
                             </el-rate>
                         </div>
-                        <div class="row" style="justify-content: space-between; padding: 0px 2px;">
+                        <div class="row" style="justify-content: space-between; padding: 0px 2px">
                             <h3 class="subTitleCards">Alto Boqueirão</h3>
                             <h3 class="subTitleCards">R$190,00/Diária</h3>
                         </div>
@@ -23,22 +22,23 @@
         </div>
         <div class="searchAroundDiv">
             <span class="searchAround" @click="$router.push('/localizacao')">Pesquise também por prestadores próximos a você</span>
-
         </div>
         <h1 class="bestRatings">Demais Prestadores em Curitiba</h1>
-        <div class="row" style="justify-content: center; margin-bottom: 5%;">
+        <div class="row" style="justify-content: center; margin-bottom: 5%">
             <div v-for="(item, index) in dataUsers" :key="index" @click="sendToProfile(item)">
                 <el-card class="cards">
-                    <img src="./unnamed.png" class="image">
-                    <div style="padding: 14px;">
-                        <div class="row" style="justify-content: space-between; padding: 0px 2px;">
-                            <h3 class="titleCards">{{item.nome}}</h3>
+                    <img src="./unnamed.png" class="image" />
+                    <div style="padding: 14px">
+                        <div class="row" style="justify-content: space-between; padding: 0px 2px">
+                            <h3 class="titleCards">{{ item.nome }}</h3>
                             <el-rate v-model="item.avaliacao_media" disabled disabled-void-color="#f0f0f0" :colors="colors">
                             </el-rate>
                         </div>
-                        <div class="row" style="justify-content: space-between; padding: 0px 2px;">
-                            <h3 class="subTitleCards">{{item.bairro}}</h3>
-                            <h3 class="subTitleCards">{{'R$'+item.valor_diaria+'/Diária'}}</h3>
+                        <div class="row" style="justify-content: space-between; padding: 0px 2px">
+                            <h3 class="subTitleCards">{{ item.bairro }}</h3>
+                            <h3 class="subTitleCards">
+                                {{ "R$" + item.valor_diaria + "/Diária" }}
+                            </h3>
                         </div>
                     </div>
                 </el-card>
@@ -49,52 +49,67 @@
 </template>
 
 <script>
-import Api from './homeScreenServices'
+import Api from "./homeScreenServices";
+import axios from "axios";
 export default {
     data() {
         return {
             topAvaliados: {
-                nome: 'oi',
+                nome: "oi",
                 idade: 2,
             },
-            colors: ['#FFC857', ' #FFC857', ' #FFC857'],
-            dataUsers: []
-        }
+            colors: ["#FFC857", " #FFC857", " #FFC857"],
+            dataUsers: [],
+        };
     },
     created() {
+        this.verifyProfile();
         this.getProfiles();
     },
     methods: {
         getProfiles() {
-            console.log('chamei profiles');
+            console.log("chamei profiles");
             //Listar Prestadores
-            if (this.$store.getters.userData.tipo_usuario == 'Solicitador') {
-                Api.getPrestadores(this.$store.getters.token).then(response => {
-                    console.log('terminei profiles');
+            if (this.$store.getters.userData.tipo_usuario == "Solicitador") {
+                Api.getPrestadores(this.$store.getters.token).then((response) => {
+                    console.log("terminei profiles");
                     if (response.status == 200) {
-                        this.value = response.data.data.avaliacao_media
-                        this.dataUsers = response.data.data
-                        console.log(response.data.data);
+                        this.value = response.data.data.avaliacao_media;
+                        this.dataUsers = response.data.data;
                     }
-                })
+                });
             }
             //Listar Solicitadores
             else {
-                Api.getSolicitadores(this.$store.getters.token).then(response => {
-                    console.log('terminei profiles');
+                Api.getSolicitadores(this.$store.getters.token).then((response) => {
+                    console.log("terminei profiles");
                     if (response.status == 200) {
-                        this.dataUsers = response.data.data
+                        this.dataUsers = response.data.data;
                         console.log(response.data.data);
                     }
-                })
+                });
             }
         },
-        sendToProfile(data){
+        sendToProfile(data) {
             this.$store.commit("SET_PROFILE_DATA", data);
-            this.$router.push('/perfil');
+            this.$router.push("/perfil");
+        },
+        verifyProfile() {
+            axios
+                .get(`${process.env.VUE_APP_BASEURL}/profile`, {
+                    headers: {
+                        authorization: localStorage.getItem("token"),
+                    },
+                })
+                .then((response) => {})
+                .catch((err) => {
+                    if (err.response.status == 403) {
+                        this.$router.push("/login");
+                    }
+                });
         }
-    }
-}
+    },
+};
 </script>
 
 <style scoped>
@@ -133,7 +148,7 @@ export default {
 }
 
 .searchAroundDiv {
-    margin-top: 50px
+    margin-top: 50px;
 }
 
 .searchAround {
