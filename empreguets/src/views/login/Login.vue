@@ -74,19 +74,15 @@ export default {
 
     },
     created() {
-        // this.showMessage();
+        if (this.$store.getters.authenticated == false) {
+            this.$message({
+                message: 'Token inválido ou usuário sem permissão!',
+                type: "error",
+            });
+            this.$store.commit('SET_AUTHENTICATED', true)
+        }
     },
     methods: {
-        // showMessage() {
-        //     Api.verifyToken().catch(err => {
-        //         if (err.response.status == 403) {
-        //             this.$message({
-        //                 message: 'Token inválido ou usuário sem permissão!',
-        //                 type: "error",
-        //             });
-        //         }
-        //     })
-        // },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {

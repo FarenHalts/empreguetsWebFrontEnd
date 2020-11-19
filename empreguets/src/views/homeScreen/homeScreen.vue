@@ -60,10 +60,11 @@ export default {
             },
             colors: ["#FFC857", " #FFC857", " #FFC857"],
             dataUsers: [],
+            value: null
         };
     },
     created() {
-        this.verifyProfile();
+        // this.verifyProfile();
         this.getProfiles();
     },
     methods: {
@@ -82,7 +83,6 @@ export default {
                 Api.getSolicitadores(localStorage.getItem('token')).then((response) => {
                     if (response.status == 200) {
                         this.dataUsers = response.data.data;
-                        console.log(response.data.data);
                     }
                 });
             }
@@ -91,20 +91,20 @@ export default {
             this.$store.commit("SET_PROFILE_DATA", data);
             this.$router.push("/perfil");
         },
-        verifyProfile() {
-            axios
-                .get(`${process.env.VUE_APP_BASEURL}/profile`, {
-                    headers: {
-                        authorization: localStorage.getItem("token"),
-                    },
-                })
-                .then((response) => {})
-                .catch((err) => {
-                    if (err.response.status == 403) {
-                        this.$router.push("/login");
-                    }
-                });
-        }
+        // verifyProfile() {
+        //     axios
+        //         .get(`${process.env.VUE_APP_BASEURL}/profile`, {
+        //             headers: {
+        //                 authorization: localStorage.getItem("token"),
+        //             },
+        //         })
+        //         .then((response) => {})
+        //         .catch((err) => {
+        //             if (err.response.status == 403) {
+        //                 this.$router.push("/login");
+        //             }
+        //         });
+        // }
     },
 };
 </script>

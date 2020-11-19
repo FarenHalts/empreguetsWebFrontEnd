@@ -48,7 +48,7 @@
         </div>
     </div>
     <div class="containerProfile">
-        <h3 class="ratesTitle" v-if="rates.length > 0">Avaliações</h3>
+        <h3 class="ratesTitle" v-if="rates.length > 0">Avaliações Recentes</h3>
         <div v-for="(item, index) in rates" :key="index">
             <div style="display: flex; justify-content: center;">
                 <div class="roundedAvatarRates">
@@ -101,7 +101,7 @@ export default {
             this.valor = data.valor_diaria
         },
         loadRates(id){
-            Api.getRates(id, this.$store.getters.token).then(response => {
+            Api.getRates(id, localStorage.getItem('token')).then(response => {
                 if (response.data.status == 'SUCCESS') {
                     this.rates = response.data.data
                 }

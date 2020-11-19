@@ -107,6 +107,7 @@ router.beforeEach((to, from, next) => {
           next();
         }).catch(err => {
           if (err.response.status == 403) {
+            store.commit("SET_AUTHENTICATED", false)
             next('/login')
           }
         })

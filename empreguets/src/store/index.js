@@ -8,7 +8,8 @@ const store = new Vuex.Store({
     logged: false,
     token: '',
     userData: null,
-    profileData: null
+    profileData: null,
+    authenticated: true
   },
   mutations: {
     SET_LOGGED(state, status) {
@@ -23,12 +24,16 @@ const store = new Vuex.Store({
     SET_PROFILE_DATA(state, status) {
       state.profileData = status
     },
+    SET_AUTHENTICATED(state, status) {
+      state.authenticated = status
+    },
   },
   getters:{
     logged: state => state.logged,
     token: state => state.token,
     userData: state => state.userData,
     profileData: state => state.profileData,
+    authenticated: state => state.authenticated,
   },
   actions: {
   },

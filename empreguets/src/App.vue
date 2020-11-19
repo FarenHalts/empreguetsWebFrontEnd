@@ -19,25 +19,12 @@
 <script>
 import Api from '../src/services/appService'
 export default {
-    data() {
+    // data() {
 
-    },
+    // },
     created() {
-        // this.settingStoreToken();
-        // this.getProfile();
     },
     methods: {
-        // settingStoreToken() {
-        //     this.$store.commit("SET_TOKEN", localStorage.getItem('token'));
-        // },
-        // getProfile() {
-        //     Api.getProfile(localStorage.getItem('token')).then(response => {
-        //         if (response.status == 200) {
-        //             this.$store.commit("SET_USER_DATA", response.data.data[0]);
-        //             console.log('setei no app');
-        //         }
-        //     })
-        // }
     }
 }
 </script>
