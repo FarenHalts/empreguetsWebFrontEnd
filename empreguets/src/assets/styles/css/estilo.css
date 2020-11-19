@@ -176,6 +176,9 @@ button:focus{
 /* .el-rate__icon{
   color: #383838 !important;
 } */
+.el-rate__icon {
+  font-size: 16px !important;
+}
 .el-rate__item{
   margin-right: -5px !important;
 }

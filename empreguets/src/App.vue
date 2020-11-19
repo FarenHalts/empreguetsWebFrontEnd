@@ -17,24 +17,39 @@
 </template>
 
 <script>
+import Api from '../src/services/appService'
 export default {
     data() {
 
     },
     created() {
+        this.settingStoreToken();
         this.checkLogged();
+        this.getProfile();
     },
     mounted() {
         this.checkLoggedMounted();
     },
     methods: {
+        settingStoreToken() {
+            this.$store.commit("SET_TOKEN", localStorage.getItem('token'));
+        },
         checkLogged() {
-          // console.log(this.$router.history.current.fullPath);
+            // console.log(this.$router.history.current.fullPath);
             console.log('chamando o app pelo created');
         },
         checkLoggedMounted() {
             console.log('chamando o app pelo mounted');
         },
+        getProfile() {
+            console.log('chamei profile');
+            Api.getProfile(this.$store.getters.token).then(response => {
+                console.log('terminei profile');
+                if (response.status == 200) {
+                    this.$store.commit("SET_USER_DATA", response.data.data[0]);
+                }
+            })
+        }
     }
 }
 </script>

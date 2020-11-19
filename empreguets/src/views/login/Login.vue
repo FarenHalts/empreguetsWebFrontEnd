@@ -48,6 +48,7 @@
 
 <script>
 import Api from './loginService'
+import ApiProfile from '../../services/appService'
 import axios from 'axios'
 export default {
     data() {
@@ -113,6 +114,11 @@ export default {
                     localStorage.setItem('token', token);
                     this.$store.commit("SET_TOKEN", token);
                     this.$router.push('/home');
+                    ApiProfile.getProfile(token).then(response => {
+                        if (response.status == 200) {
+                            this.$store.commit("SET_USER_DATA", response.data.data[0]);
+                        }
+                    })
                 }
             }).catch(err => {
                 this.$message({

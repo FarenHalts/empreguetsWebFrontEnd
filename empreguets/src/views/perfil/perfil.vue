@@ -6,7 +6,7 @@
         </div>
         <div>
             <div style="display: flex;">
-                <h3 class="nameProfile">Edina Soares</h3>
+                <h3 class="nameProfile">{{this.nome}}</h3>
                 <el-rate v-model="value" class="alignStarts" disabled disabled-void-color="#f0f0f0" :colors="colors">
                 </el-rate>
             </div>
@@ -14,7 +14,7 @@
                 <span>Descrição</span>
             </div>
             <div class="decription profileData">
-                <span>Honesta, trabalhadora e família, gosto de churros com chanela, meus filhos são tudo para mim.</span>
+                <span>{{this.descricao}}</span>
             </div>
             <div>
                 <div>
@@ -22,7 +22,7 @@
                         <span>Localização</span>
                     </div>
                     <div class="profileData">
-                        <span>Alto Boqueirão</span>
+                        <span>{{this.bairro}}</span>
                     </div>
                 </div>
                 <div>
@@ -30,7 +30,7 @@
                         <span>Contato</span>
                     </div>
                     <div class="profileData">
-                        <span>(41) 99900-0156</span>
+                        <span>{{this.telefone}}</span>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <span>Valor Diária</span>
                 </div>
                 <div class="profileData">
-                    <span>R$190,00</span>
+                    <span>{{'R$'+this.valor}}</span>
                 </div>
             </div>
             <div class="services">
@@ -48,36 +48,64 @@
         </div>
     </div>
     <div class="containerProfile">
-        <h3 class="ratesTitle">Avaliações</h3>
-        <div v-for="(o) in 4" :key="o">
+        <h3 class="ratesTitle" v-if="rates.length > 0">Avaliações</h3>
+        <div v-for="(item, index) in rates" :key="index">
             <div style="display: flex; justify-content: center;">
                 <div class="roundedAvatarRates">
                     <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="70" width="70">
                 </div>
                 <div>
                     <div style="display: flex;">
-                        <span class="titlesNameRates">Padre Marcelo</span>
-                        <el-rate v-model="value" class="alignRatingStarts" disabled disabled-void-color="#f0f0f0" :colors="colors">
+                        <span class="titlesNameRates">{{item.nome}}</span>
+                        <el-rate v-model="item.avaliacao" class="alignRatingStarts" disabled disabled-void-color="#f0f0f0" :colors="colors">
                         </el-rate>
                     </div>
                     <div class="titlesCommentRates">
-                        <span>"Edina é uma pessoa com Deus no coração, isso me da confiança."</span>
+                        <span>{{'"'+item.comentario+'"'}}</span>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 </template>
 
 <script>
+import Api from './profileService'
 export default {
     data() {
         return {
-            value: 4,
-            colors: ['#FFC857', ' #FFC857', ' #FFC857']
+            value: null,
+            colors: ['#FFC857', ' #FFC857', ' #FFC857'],
+            nome: '',
+            descricao: '',
+            bairro: '',
+            valor: '',
+            rates: []
+        }
+    },
+    created(){
+        if (this.$store.getters.profileData) {
+            this.loadingDataProfile(this.$store.getters.profileData)
+            this.loadRates(this.$store.getters.profileData.id_usuario)
+        }
+    },
+    methods: {
+        loadingDataProfile(data){
+            let nota = parseFloat(data.avaliacao_media)
+            this.nome = data.nome,
+            this.value = nota,
+            this.descricao = data.descricao_perfil,
+            this.bairro = data.bairro,
+            this.telefone = data.telefone,
+            this.valor = data.valor_diaria
+        },
+        loadRates(id){
+            Api.getRates(id, this.$store.getters.token).then(response => {
+                if (response.data.status == 'SUCCESS') {
+                    this.rates = response.data.data
+                }
+            })
         }
     }
 }
