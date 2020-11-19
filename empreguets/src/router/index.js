@@ -99,18 +99,17 @@ router.beforeEach((to, from, next) => {
         next('/login')
       }
       else{
-        axios.get(`${process.env.VUE_APP_BASEURL}/teste`, {headers: {
+        axios.get(`${process.env.VUE_APP_BASEURL}/profile`, {headers: {
           authorization: localStorage.getItem('token')
         }
       }).then(response =>{
-          console.log(response);
+          store.commit("SET_USER_DATA", response.data.data[0]);
           next();
         }).catch(err => {
           if (err.response.status == 403) {
             next('/login')
           }
         })
-
       }
 })
 export default router

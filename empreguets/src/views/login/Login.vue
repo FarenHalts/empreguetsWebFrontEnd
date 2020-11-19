@@ -74,19 +74,19 @@ export default {
 
     },
     created() {
-        this.showMessage();
+        // this.showMessage();
     },
     methods: {
-        showMessage() {
-            Api.verifyToken().catch(err => {
-                if (err.response.status == 403) {
-                    this.$message({
-                        message: 'Token inválido ou usuário sem permissão!',
-                        type: "error",
-                    });
-                }
-            })
-        },
+        // showMessage() {
+        //     Api.verifyToken().catch(err => {
+        //         if (err.response.status == 403) {
+        //             this.$message({
+        //                 message: 'Token inválido ou usuário sem permissão!',
+        //                 type: "error",
+        //             });
+        //         }
+        //     })
+        // },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {

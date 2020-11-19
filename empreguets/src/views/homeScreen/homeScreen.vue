@@ -68,11 +68,9 @@ export default {
     },
     methods: {
         getProfiles() {
-            console.log("chamei profiles");
             //Listar Prestadores
             if (this.$store.getters.userData.tipo_usuario == "Solicitador") {
-                Api.getPrestadores(this.$store.getters.token).then((response) => {
-                    console.log("terminei profiles");
+                Api.getPrestadores(localStorage.getItem('token')).then((response) => {
                     if (response.status == 200) {
                         this.value = response.data.data.avaliacao_media;
                         this.dataUsers = response.data.data;
@@ -81,8 +79,7 @@ export default {
             }
             //Listar Solicitadores
             else {
-                Api.getSolicitadores(this.$store.getters.token).then((response) => {
-                    console.log("terminei profiles");
+                Api.getSolicitadores(localStorage.getItem('token')).then((response) => {
                     if (response.status == 200) {
                         this.dataUsers = response.data.data;
                         console.log(response.data.data);
