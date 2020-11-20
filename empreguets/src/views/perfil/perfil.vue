@@ -125,7 +125,7 @@ export default {
             rates: [],
             dialogVisible: false,
             profile: [],
-            novoValor: '',
+            novoValor: "",
             serviceDate: null,
             pt: {
                 firstDayOfWeek: 1,
@@ -142,6 +142,14 @@ export default {
         if (this.$store.getters.profileData) {
             this.loadingDataProfile(this.$store.getters.profileData);
             this.loadRates(this.$store.getters.profileData.id_usuario);
+        }
+    },
+    watch: {
+        dialogVisible(){
+            if (this.dialogVisible == false) {
+                this.serviceDate = null;
+                this.novoValor = "";
+            }
         }
     },
     methods: {
