@@ -122,9 +122,9 @@ export default {
                     const token = response.data.data;
                     localStorage.setItem('token', token);
                     this.$store.commit("SET_TOKEN", token);
-                    this.$router.push('/home');
                     ApiProfile.getProfile(token).then(response => {
                         if (response.status == 200) {
+                            this.$router.push('/home');
                             this.$store.commit("SET_USER_DATA", response.data.data[0]);
                         }
                     })
