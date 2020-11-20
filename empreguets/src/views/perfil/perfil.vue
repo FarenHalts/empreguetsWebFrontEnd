@@ -73,8 +73,7 @@
     <el-dialog title="Marcar Serviço" :visible.sync="dialogVisible" width="70%">
         <div class="row">
             <div class="col-6">
-                <Calendar v-model="serviceDate" :inline="true" show>
-                </Calendar>
+                <Calendar v-model="serviceDate" :inline="true" :locale="pt"/>
             </div>
             <div class="col-6">
                 <div>
@@ -87,11 +86,11 @@
                 <div class="mt-3">
                     <div>{{"Deseja enviar uma nova proposta de valor para o " + profile.tipo_usuario + "?"}}</div>
                     <div class="form-row">
-                        <el-input v-mask="['R$###,##', 'R$##,##']" class="col-5" size="small" placeholder="Novo Valor (R$)" v-model="novoValor"></el-input>
+                        <el-input v-mask="['R$###.##', 'R$##.##']" class="col-5" size="small" placeholder="Novo Valor (R$)" v-model="novoValor"></el-input>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <div>{{"Data marcada para o serviço: " + serviceDate}}</div>
+                    <div>{{"Data marcada para o serviço: " + formatData(serviceDate)}}</div>
                 </div>
                 <div class="mt-5">
                     <div>{{"Após marcar o serviço, será enviado as informações do serviço para o " + profile.tipo_usuario + ", onde ele poderá aceitar ou recusar o serviço."}} </div>
@@ -108,7 +107,6 @@
 
 <script>
 import Calendar from 'primevue/calendar';
-import Checkbox from 'primevue/checkbox';
 import Api from "./profileService";
 import moment from "moment";
 export default {
@@ -132,16 +130,11 @@ export default {
                 firstDayOfWeek: 1,
                 dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
                 dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
-                dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+                dayNamesMin: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
                 monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
                 monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dec"],
-                today: 'Hoje',
-                // dateFormat: 'mm/dd/yy',
-                clear: 'Limpar',
-            },
-            minDate: null,
-            maxDate: null,
-            invalidDates: null
+                today: 'Hoje'
+            }
         };
     },
     created() {
@@ -149,18 +142,6 @@ export default {
             this.loadingDataProfile(this.$store.getters.profileData);
             this.loadRates(this.$store.getters.profileData.id_usuario);
         }
-    },
-    watch: {
-        serviceDate(time){
-            console.log('aaaaa',time);
-                 // atribundo ao calendario do dec 13 datas desbloqueadas para o pagamento
-                  let max = new Date(time);
-                  let min = new Date(time);
-                  max.setDate(max.getDate() + 7);
-                  min.setDate(min.getDate() -2);
-                  this.maxDate = (max);
-                  this.minDate = (min);
-               },
     },
     methods: {
         loadingDataProfile(data) {
@@ -182,7 +163,15 @@ export default {
         },
         markService() {
             let data = this.$store.getters.profileData;
-
+            let markServiceDate = moment(this.serviceDate).format("DD/MM/YYYY")
+        },
+        formatData(data){
+            if (data) {
+                let formatDate = moment(data).format("DD/MM/YYYY")
+                return formatDate
+            } else {
+                return ''
+            }
         }
     },
 };
