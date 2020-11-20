@@ -27,7 +27,7 @@ import * as VueGoogleMaps from 'vue2-google-maps'
  
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyCNrxN9zZ7VEth5FH7jWSzpHg8tBeuknBM',
+    key: process.env.VUE_APP_KEY_MAPS,
     libraries: 'places',
   },
 })
