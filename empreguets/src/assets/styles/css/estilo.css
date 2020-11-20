@@ -118,7 +118,7 @@ body{
     content: unset !important;
 }
 
-.el-input__inner{
+.invisibleInputs .el-input__inner{
     background-color: unset !important;
     color: #f0f0f0 !important;
 }

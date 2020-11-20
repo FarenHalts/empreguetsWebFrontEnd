@@ -1,5 +1,5 @@
 <template>
-<div class="container-fluid localizacao">
+<div class="container-fluid localizacao invisibleInputs">
     <div>
         <div>
             <h1 class="title text-center">Pesquisar por prestadores de serviço próximos a sua localização</h1>

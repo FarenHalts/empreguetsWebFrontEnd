@@ -1,5 +1,5 @@
 <template>
-<div class="boxLogin">
+<div class="boxLogin invisibleInputs">
     <div class="headerLogin">Empreguets
     </div>
 

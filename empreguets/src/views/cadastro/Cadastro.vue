@@ -1,5 +1,5 @@
 <template>
-<div id="cadastro">
+<div id="cadastro" class="invisibleInputs">
     <div class="container-flui">
 
         <div class="boxCadastro">

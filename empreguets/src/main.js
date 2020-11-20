@@ -4,6 +4,15 @@ import router from './router'
 import store from './store'
 import "../src/assets/styles/css/estilo.css";
 
+//Importação Prime Vue (Calendar)
+import Calendar from 'primevue/calendar';
+
+import 'primevue/resources/themes/saga-blue/theme.css';
+import 'primeicons/primeicons.css';
+
+Vue.component('Calendar', Calendar);
+//Fim Importação Prime Vue (Calendar)
+
 
 //importação Element
 import locale from "element-ui/lib/locale/lang/pt-br";
