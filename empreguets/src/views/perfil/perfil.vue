@@ -39,7 +39,7 @@
                     <span>Valor Diária</span>
                 </div>
                 <div class="profileData">
-                    <span>{{ "R$" + this.valor }}</span>
+                    <span>{{ "R$" + this.valor + ".00"}}</span>
                 </div>
             </div>
             <div class="services">
@@ -73,7 +73,7 @@
     <el-dialog title="Marcar Serviço" :visible.sync="dialogVisible" width="70%">
         <div class="row">
             <div class="col-6">
-                <Calendar v-model="serviceDate" :inline="true" :locale="pt"/>
+                <Calendar v-model="serviceDate" :inline="true" :locale="pt" />
             </div>
             <div class="col-6">
                 <div>
@@ -86,7 +86,7 @@
                 <div class="mt-3">
                     <div>{{"Deseja enviar uma nova proposta de valor para o " + profile.tipo_usuario + "?"}}</div>
                     <div class="form-row">
-                        <el-input v-mask="['R$###.##', 'R$##.##']" class="col-5" size="small" placeholder="Novo Valor (R$)" v-model="novoValor"></el-input>
+                        <el-input v-mask="['R$###', 'R$##']" class="col-5" size="small" placeholder="Novo Valor (R$)" v-model="novoValor"></el-input>
                     </div>
                 </div>
                 <div class="mt-3">
@@ -109,6 +109,7 @@
 import Calendar from 'primevue/calendar';
 import Api from "./profileService";
 import moment from "moment";
+import apiService from "../../services/service"
 export default {
     components: {
         Calendar,
@@ -124,7 +125,7 @@ export default {
             rates: [],
             dialogVisible: false,
             profile: [],
-            novoValor: null,
+            novoValor: '',
             serviceDate: null,
             pt: {
                 firstDayOfWeek: 1,
@@ -163,9 +164,33 @@ export default {
         },
         markService() {
             let data = this.$store.getters.profileData;
+            let loggedId = this.$store.getters.userData.id_usuario;
+            let serviceAdress = data.endereco + ", " + data.num_endereco + ", " + data.bairro;
             let markServiceDate = moment(this.serviceDate).format("DD/MM/YYYY")
+            let serviceOBJ = {
+                "id_requisitado": data.id_usuario,
+                "id_usuario": loggedId,
+                "data": markServiceDate,
+                "endereco": serviceAdress,
+                "valor_proposto": data.valor_diaria,
+                "novo_valor": this.novoValor
+            }
+            if (markServiceDate == 'Invalid date') {
+                this.$message({
+                    message: 'Insira uma data de serviço!',
+                    type: "error",
+                });
+            } else {
+                apiService.markService(serviceOBJ).then(response => {
+                    this.$message({
+                        message: 'Solicitação de serviço enviada com sucesso!',
+                        type: "success",
+                    });
+                    this.dialogVisible = false;
+                })
+            }
         },
-        formatData(data){
+        formatData(data) {
             if (data) {
                 let formatDate = moment(data).format("DD/MM/YYYY")
                 return formatDate

@@ -50,7 +50,7 @@
                         <el-input v-model="ruleForm.complemento"></el-input>
                     </el-form-item>
                     <el-form-item class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-6" label="Valor diária" prop="valor">
-                        <el-input v-mask="'R$###.##'" v-model="ruleForm.valor"></el-input>
+                        <el-input v-mask="['R$###', 'R$##']" v-model="ruleForm.valor"></el-input>
                     </el-form-item>
                     <el-form-item class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-6" label="Raio Atendimento" prop="raio">
                         <el-input v-mask="'##Km'" v-model="ruleForm.raio"></el-input>
@@ -109,7 +109,7 @@
                         <el-input v-model="ruleFormPJ.complementopj"></el-input>
                     </el-form-item>
                     <el-form-item class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-6" label="Valor serviço" prop="valorpj">
-                        <el-input v-mask="'R$###.##'" v-model="ruleFormPJ.valorpj"></el-input>
+                        <el-input v-mask="['R$###', 'R$##']" v-model="ruleFormPJ.valorpj"></el-input>
                     </el-form-item>
                     <el-form-item class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" label="Bairro" prop="bairropj">
                         <el-input v-model="ruleFormPJ.bairropj"></el-input>
