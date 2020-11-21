@@ -50,6 +50,7 @@
 import Api from './loginService'
 import ApiProfile from '../../services/appService'
 import axios from 'axios'
+import {mapMutations} from 'vuex'
 export default {
     data() {
         return {
@@ -83,6 +84,9 @@ export default {
         }
     },
     methods: {
+        ...mapMutations({
+            renderApp: 'SET_RENDER_APP'
+        }),
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
@@ -124,6 +128,7 @@ export default {
                     this.$store.commit("SET_TOKEN", token);
                     ApiProfile.getProfile(token).then(response => {
                         if (response.status == 200) {
+                            this.renderApp(true);
                             this.$router.push('/home');
                             this.$store.commit("SET_USER_DATA", response.data.data[0]);
                         }

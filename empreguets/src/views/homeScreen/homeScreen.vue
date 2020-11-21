@@ -50,6 +50,7 @@
 
 <script>
 import Api from "./homeScreenServices";
+import solicitationAPI from "../../services/appService";
 import axios from "axios";
 export default {
     data() {
@@ -66,6 +67,7 @@ export default {
     created() {
         // this.verifyProfile();
         this.getProfiles();
+        // this.checkSolicitations();
     },
     methods: {
         getProfiles() {
@@ -106,6 +108,19 @@ export default {
         //             }
         //         });
         // }
+        checkSolicitations() {
+            solicitationAPI.checkSolicitations(this.$store.getters.userData.id_usuario, localStorage.getItem("token")).then(response => {
+                this.$store.commit('SET_SOLICITATIONS', response.data.data)
+                // this.solicitation = this.$store.getters.solicitations;
+                // this.valueBell = this.$store.getters.solicitations.length;
+            }).catch(err => {
+                if (err.response.status == 400) {
+                    this.solicitation = [];
+                    this.drawer = false;
+                    this.valueBell = '';
+                }
+            })
+        },
     },
 };
 </script>

@@ -104,6 +104,7 @@ router.beforeEach((to, from, next) => {
         }
       }).then(response =>{
         store.commit("SET_USER_DATA", response.data.data[0]);
+        store.commit("SET_RENDER_APP", true);
         console.log('setei gay');
           next();
         }).catch(err => {

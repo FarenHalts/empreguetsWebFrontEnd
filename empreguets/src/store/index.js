@@ -9,7 +9,9 @@ const store = new Vuex.Store({
     token: '',
     userData: null,
     profileData: null,
-    authenticated: true
+    authenticated: true,
+    solicitations: [],
+    renderApp: false
   },
   mutations: {
     SET_LOGGED(state, status) {
@@ -27,6 +29,12 @@ const store = new Vuex.Store({
     SET_AUTHENTICATED(state, status) {
       state.authenticated = status
     },
+    SET_SOLICITATIONS(state, status) {
+      state.solicitations = status
+    },
+    SET_RENDER_APP(state, status) {
+      state.renderApp = status
+    },
   },
   getters:{
     logged: state => state.logged,
@@ -34,6 +42,8 @@ const store = new Vuex.Store({
     userData: state => state.userData,
     profileData: state => state.profileData,
     authenticated: state => state.authenticated,
+    solicitations: state => state.solicitations,
+    renderApp: state => state.renderApp,
   },
   actions: {
   },
