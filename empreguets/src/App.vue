@@ -70,7 +70,7 @@ export default {
             drawer: false,
             solicitation: [],
             loggedUser: [],
-            valueBell: 0
+            valueBell: ''
         }
     },
     created() {
@@ -95,6 +95,7 @@ export default {
                 if (err.response.status == 400) {
                     this.solicitation = [];
                     this.drawer = false;
+                    this.valueBell = '';
                 }
             })
         },

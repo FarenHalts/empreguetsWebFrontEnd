@@ -381,7 +381,7 @@ export default {
                 cpf: form.cpf,
                 rg: form.rg,
                 data_nascimento: form.datanascimento,
-                valor_diaria: form.valor,
+                valor_servico: form.valor,
                 raio: form.raio,
                 descricao_perfil: ''
             }

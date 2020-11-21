@@ -37,7 +37,7 @@
                         <div class="row" style="justify-content: space-between; padding: 0px 2px">
                             <h3 class="subTitleCards">{{ item.bairro }}</h3>
                             <h3 class="subTitleCards">
-                                {{ "R$" + item.valor_diaria + "/Diária" }}
+                                {{ "R$" + item.valor_servico + "/Diária" }}
                             </h3>
                         </div>
                     </div>
@@ -82,6 +82,7 @@ export default {
             else {
                 Api.getSolicitadores(localStorage.getItem('token')).then((response) => {
                     if (response.status == 200) {
+                        this.value = response.data.data.avaliacao_media;
                         this.dataUsers = response.data.data;
                     }
                 });

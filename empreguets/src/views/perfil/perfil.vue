@@ -81,7 +81,7 @@
                     <div>{{profile.endereco + ", " + profile.num_endereco + " - " + profile.bairro}}</div>
                 </div>
                 <div class="mt-3">
-                    <div>{{"Valor proposto pelo " + profile.tipo_usuario + ": " + "R$" + profile.valor_diaria}}</div>
+                    <div>{{"Valor proposto pelo " + profile.tipo_usuario + ": " + "R$" + profile.valor_servico}}</div>
                 </div>
                 <div class="mt-3">
                     <div>{{"Deseja enviar uma nova proposta de valor para o " + profile.tipo_usuario + "?"}}</div>
@@ -161,7 +161,7 @@ export default {
             (this.descricao = data.descricao_perfil),
             (this.bairro = data.bairro),
             (this.telefone = data.telefone),
-            (this.valor = data.valor_diaria);
+            (this.valor = data.valor_servico);
         },
         loadRates(id) {
             Api.getRates(id, localStorage.getItem("token")).then((response) => {
@@ -174,14 +174,15 @@ export default {
             let data = this.$store.getters.profileData;
             let loggedId = this.$store.getters.userData.id_usuario;
             let serviceAdress = data.endereco + ", " + data.num_endereco + ", " + data.bairro;
-            let markServiceDate = moment(this.serviceDate).format("DD/MM/YYYY")
+            let markServiceDate = moment(this.serviceDate).format("DD/MM/YYYY");
+            let newValor = this.novoValor.slice(2);
             let serviceOBJ = {
                 "id_requisitado": data.id_usuario,
                 "id_usuario": loggedId,
                 "data": markServiceDate,
                 "endereco": serviceAdress,
-                "valor_proposto": data.valor_diaria,
-                "novo_valor": this.novoValor
+                "valor_proposto": data.valor_servico,
+                "novo_valor": newValor
             }
             if (markServiceDate == 'Invalid date') {
                 this.$message({
