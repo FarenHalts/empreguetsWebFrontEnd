@@ -103,7 +103,8 @@ router.beforeEach((to, from, next) => {
           authorization: localStorage.getItem('token')
         }
       }).then(response =>{
-          store.commit("SET_USER_DATA", response.data.data[0]);
+        store.commit("SET_USER_DATA", response.data.data[0]);
+        console.log('setei gay');
           next();
         }).catch(err => {
           if (err.response.status == 403) {

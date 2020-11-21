@@ -197,3 +197,14 @@ button:focus{
   border-color: unset !important;
   outline: 0;
 }
+#el-drawer__title span{
+  outline: unset !important;
+  font-family: RobotoRegular;
+  font-size: 20px;
+}
+.el-drawer{
+  background-color: #f0f0f0 !important;
+}
+.el-drawer{
+  overflow: auto !important;
+}
