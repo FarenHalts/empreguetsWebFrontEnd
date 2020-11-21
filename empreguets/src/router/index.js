@@ -92,8 +92,10 @@ router.beforeEach((to, from, next) => {
   if (from.path == '/login' && to.path == '/home') {
         next()
       } else if(to.path == '/login'){
+        store.commit('SET_RENDER_APP', false)
         next()
       } else if(to.path == '/cadastro'){
+        store.commit('SET_RENDER_APP', false)
         next()
       } else if(from.path == '/cadastro'){
         next('/login')

@@ -72,7 +72,7 @@ export default {
         }
     },
     created() {
-        this.checkSolicitations()
+        this.checkSolicitations();
     },
     methods: {
         checkSolicitations() {
@@ -123,7 +123,7 @@ export default {
                     this.checkSolicitations();
                 }
             })
-        },
+        }
     }
 }
 </script>

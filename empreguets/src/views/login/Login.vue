@@ -129,8 +129,8 @@ export default {
                     ApiProfile.getProfile(token).then(response => {
                         if (response.status == 200) {
                             this.renderApp(true);
-                            this.$router.push('/home');
                             this.$store.commit("SET_USER_DATA", response.data.data[0]);
+                            this.$router.push('/home');
                         }
                     })
                 }
