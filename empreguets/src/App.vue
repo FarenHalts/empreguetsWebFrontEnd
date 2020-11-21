@@ -1,12 +1,44 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> -->
-    </div>
-    <router-view/>
-  </div>
+<div id="app">
+    <headerEmp v-if="renderApp">
+    </headerEmp>
+    <router-view />
+</div>
 </template>
+
+<script>
+import profileAPI from './views/login/loginService'
+import headerEmp from '@/components/headerEmp'
+import {
+    mapGetters
+} from 'vuex'
+export default {
+    components: {
+        headerEmp
+    },
+    data() {
+        return {}
+    },
+    created() {
+        this.setUserData();
+    },
+    computed: {
+        ...mapGetters({
+            renderApp: 'renderApp'
+        }),
+    },
+    methods: {
+        setUserData() {
+            profileAPI.verifyToken(localStorage.getItem("token")).then(response => {
+                console.log(response);
+                if (response.status == 200) {
+                    this.loggedUser = response.data.data[0];
+                }
+            })
+        },
+    }
+}
+</script>
 
 <style>
 </style>
