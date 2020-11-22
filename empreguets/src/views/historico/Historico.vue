@@ -125,7 +125,7 @@ export default {
             api.rateService(rateObj, localStorage.getItem("token")).then(response => {
                 if (response.status == 200) {
                     this.listServices()
-                    this.dialogVisible = false
+                    this.dialogVisible = false;
                 }
             }).catch(err => {
                 if (err.response.status == 400) {
@@ -133,6 +133,7 @@ export default {
                         message: err.response.data.message,
                         type: "error",
                     });
+                    this.dialogVisible = false;
                 }
             })
         },
