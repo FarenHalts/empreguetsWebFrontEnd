@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container-fluid">
     <h1 class="titleGraphs">Gráfico dos status de serviços</h1>
     <div class="row justify-content-center" style="padding-top: 50px;">
         <div>
@@ -36,13 +36,13 @@ export default {
     },
     methods: {
         getGraphicData() {
-            api.getGraphicData()
+            api.getGraphicData(this.$store.getters.userData.id_usuario, localStorage.getItem("token"))
                 .then(response => {
-                    if (response.status == "SUCCESS") {
+                    if (response.status == 200) {
                         const total = 100
-                        const completed = response.data.completed
-                        const pendings = response.data.pendings
-                        const reports = response.data.reports
+                        const completed = response.data.data.completed
+                        const pendings = response.data.data.pendings
+                        const reports = response.data.data.reports
                         const contarRep = completed + pendings + reports
 
                         let semitotalRep = total / total / contarRep

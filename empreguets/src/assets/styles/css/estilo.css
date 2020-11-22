@@ -208,3 +208,22 @@ button:focus{
 .el-drawer{
   overflow: auto !important;
 }
+.historyView .el-table{
+  border-radius: 5px;
+  box-shadow: 0 0px 60px -15px rgba(0, 0, 0, 0.3);
+}
+/* .historyView .el-table td:last-child{
+  text-align: right;
+} */
+.historyView .el-dialog{
+  width: 35% !important;
+}
+/* .historyView .el-dialog__header{
+  text-align: left !important;
+}
+.historyView .el-dialog__body{
+  text-align: left !important;
+} */
+.rateStyle .el-rate__icon{
+  font-size: 40px !important;
+}

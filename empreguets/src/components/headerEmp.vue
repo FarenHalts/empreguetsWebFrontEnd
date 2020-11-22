@@ -14,12 +14,31 @@
                     </el-badge>
                 </div>
                 <div>
-                    <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" alt="" width="45" style="border-radius: 50px; border: 1px solid #f0f0f0;">
+                    <el-popover style="cursor: pointer">
+                        <div @click="$router.push('/historico')">
+                            <div>{{this.$store.getters.userData.nome}}</div>
+                        </div>
+                        <div>
+                            <div>Meu Perfil</div>
+                        </div>
+                        <div @click="$router.push('/historico')">
+                            <div>Histórico de Solicitações</div>
+                        </div>
+                        <div @click="$router.push('/grafico')">
+                            <div>Estatísticas</div>
+                        </div>
+                        <div @click="logout()">
+                            <div>Sair</div>
+                        </div>
+                        <div slot="reference">
+                            <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" alt="" width="45" style="border-radius: 50px; border: 1px solid #f0f0f0;">
+                        </div>
+                    </el-popover>
                 </div>
             </div>
         </div>
     </div>
-    <el-drawer title="Solicitações" :visible.sync="drawer" :direction="direction" :before-close="handleClose">
+    <el-drawer title="Solicitações" :visible.sync="drawer" :direction="direction">
         <div v-if="solicitation.length > 0">
             <div v-for="(item, index) in solicitation" :key="index" class="solicitationsStyle">
                 <div class="borderSolicitation">
@@ -123,10 +142,15 @@ export default {
                     this.checkSolicitations();
                 }
             })
+        },
+        logout(){
+            localStorage.clear();
+            this.$router.push('/login')
         }
     }
 }
 </script>
+
 <style>
 .styleBell {
     margin-top: 13px;

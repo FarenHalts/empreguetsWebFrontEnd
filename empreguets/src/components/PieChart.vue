@@ -36,13 +36,13 @@ export default {
         }
     },
     mounted() {
-        this.renderChart(this.chartData, this.options)
-        api.getGraphicData()
+        this.renderChart(this.chartData, this.options);
+        api.getGraphicData(this.$store.getters.userData.id_usuario, localStorage.getItem("token"))
             .then((response) => {
-                if (response.status == "SUCCESS") {
-                    this.chartData.datasets[0].data[0] = response.data.completed
-                    this.chartData.datasets[0].data[1] = response.data.pendings
-                    this.chartData.datasets[0].data[2] = response.data.reports
+                if (response.status == 200) {
+                    this.chartData.datasets[0].data[0] = response.data.data.completed
+                    this.chartData.datasets[0].data[1] = response.data.data.pendings
+                    this.chartData.datasets[0].data[2] = response.data.data.reports
                     this.$data._chart.update()
                 }
             }) 

@@ -10,6 +10,7 @@ import homeScreen from '../views/homeScreen/homeScreen.vue'
 import Perfil from '../views/perfil/perfil.vue'
 import Localizacao from '../views/localizacao/localizacao.vue'
 import Grafico from '../views/grafico/Pie.vue'
+import Historico from '../views/historico/Historico.vue'
 
 Vue.use(VueRouter)
 
@@ -72,6 +73,11 @@ const routes = [
     path: '/grafico',
     name: 'Grafico',
     component: Grafico,
+  },
+  {
+    path: '/historico',
+    name: 'Historico',
+    component: Historico,
   },
   {
     path: '/about',
