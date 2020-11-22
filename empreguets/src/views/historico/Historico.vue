@@ -65,7 +65,7 @@
                 </div>
                 <div class="pt-2" style="margin-top: 35px;">
                     <!-- <label>Descrição da avaliação</label> -->
-                    <el-input :autosize="{ minRows: 4, maxRows: 4}" type="textarea" placeholder="Insira aqui uma mensagem" v-model="descricao_avalicao" maxlength="200" show-word-limit>
+                    <el-input :autosize="{ minRows: 4, maxRows: 4}" type="textarea" placeholder="Insira aqui uma mensagem" v-model="descricao_avaliacao" maxlength="200" show-word-limit>
                     </el-input>
                 </div>
                 <div class="styleProblem">
@@ -91,8 +91,7 @@ export default {
     data() {
         return {
             services: [],
-            avalicao: '5',
-            descricao_avalicao: '',
+            descricao_avaliacao: '',
             contratempo: false,
             rateValue: [],
             colors: {
@@ -107,35 +106,50 @@ export default {
             rateDialog: {
                 data: {},
                 rate: '',
-                idServico: '' 
+                idServico: ''
             },
         }
     },
     created() {
         this.listServices();
     },
+    watch: {
+        dialogVisible() {
+            if (this.dialogVisible == false) {
+                this.descricao_avaliacao = '';
+                this.contratempo = false;
+            }
+        }
+    },
     methods: {
         rateService() {
-            let rateObj = {
-                "id_servico": this.rateDialog.idServico.toString(),
-                "avaliacao": this.rateDialog.rate.toString(),
-                "descricao_avaliacao": this.descricao_avalicao,
-                "contratempo": this.contratempo.toString()
+            if (!this.descricao_avaliacao == '') {
+                let rateObj = {
+                    "id_servico": this.rateDialog.idServico.toString(),
+                    "avaliacao": this.rateDialog.rate.toString(),
+                    "descricao_avaliacao": this.descricao_avaliacao,
+                    "contratempo": this.contratempo.toString()
+                }
+                api.rateService(rateObj, localStorage.getItem("token")).then(response => {
+                    if (response.status == 200) {
+                        this.listServices()
+                        this.dialogVisible = false;
+                    }
+                }).catch(err => {
+                    if (err.response.status == 400) {
+                        this.$message({
+                            message: err.response.data.message,
+                            type: "error",
+                        });
+                        this.dialogVisible = false;
+                    }
+                })
+            } else {
+                this.$message({
+                    message: 'Insira uma mensagem para a avaliação do serviço!',
+                    type: "error",
+                });
             }
-            api.rateService(rateObj, localStorage.getItem("token")).then(response => {
-                if (response.status == 200) {
-                    this.listServices()
-                    this.dialogVisible = false;
-                }
-            }).catch(err => {
-                if (err.response.status == 400) {
-                    this.$message({
-                        message: err.response.data.message,
-                        type: "error",
-                    });
-                    this.dialogVisible = false;
-                }
-            })
         },
         listServices() {
             api.services(this.$store.getters.userData.id_usuario, localStorage.getItem("token")).then(response => {
@@ -193,7 +207,7 @@ export default {
     font-size: 20px;
 }
 
-.styleProblem{
+.styleProblem {
     padding-top: 10px;
     font-size: 12px;
     font-family: RobotoRegular;
