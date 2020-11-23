@@ -163,8 +163,6 @@ export default {
             return item
         },
         dial(index, item) {
-            console.log(item);
-            console.log(this.rateValue[index]);
             this.dialogVisible = true;
             this.rateDialog = {
                 data: item,

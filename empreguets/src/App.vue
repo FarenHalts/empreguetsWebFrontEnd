@@ -30,7 +30,6 @@ export default {
     methods: {
         setUserData() {
             profileAPI.verifyToken(localStorage.getItem("token")).then(response => {
-                console.log(response);
                 if (response.status == 200) {
                     this.loggedUser = response.data.data[0];
                 }

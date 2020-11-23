@@ -11,6 +11,7 @@ import Perfil from '../views/perfil/perfil.vue'
 import Localizacao from '../views/localizacao/localizacao.vue'
 import Grafico from '../views/grafico/Pie.vue'
 import Historico from '../views/historico/Historico.vue'
+import meuPerfil from '../views/meuPerfil/meuPerfil.vue'
 
 Vue.use(VueRouter)
 
@@ -80,6 +81,11 @@ const routes = [
     component: Historico,
   },
   {
+    path: '/meuperfil',
+    name: 'meuPefil',
+    component: meuPerfil,
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
@@ -113,7 +119,6 @@ router.beforeEach((to, from, next) => {
       }).then(response =>{
         store.commit("SET_USER_DATA", response.data.data[0]);
         store.commit("SET_RENDER_APP", true);
-        console.log('setei gay');
           next();
         }).catch(err => {
           if (err.response.status == 403) {

@@ -227,3 +227,11 @@ button:focus{
 .rateStyle .el-rate__icon{
   font-size: 40px !important;
 }
+.edit .el-form-item__label{
+  color:#000000ad !important;
+}
+
+.editDialog .el-dialog__body{
+  margin-right: 15px;
+  margin-left: 15px;
+}

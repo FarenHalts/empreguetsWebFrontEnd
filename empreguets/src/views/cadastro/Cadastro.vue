@@ -14,7 +14,7 @@
                 </el-radio-group>
                 <h3 class="loginTextType">Preencha seus dados</h3>
             </div>
-            <div class="container" style="padding-top: 15px;" v-if="this.tipoCadastro == 'Prestador'">
+            <div class="container" style="padding-top: 15px;" v-if="this.tipoCadastro == 'Prestador'" :key="k1">
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm form-row">
                     <el-form-item class="col-12 col-sm-8 col-md-6 col-lg-7 col-xl-8" label="Nome Completo" prop="nome">
                         <el-input type="text" v-model="ruleForm.nome"></el-input>
@@ -32,7 +32,7 @@
                         <el-input v-mask="'##/##/####'" v-model="ruleForm.datanascimento"></el-input>
                     </el-form-item>
                     <el-form-item class="col-4 col-sm-6 col-md-3 col-lg-6 col-xl-4" label="CEP" prop="cep">
-                        <el-input v-mask="'#####-###'" v-model="ruleForm.cep" @input="searchCEPPJ"></el-input>
+                        <el-input v-mask="'#####-###'" v-model="ruleForm.cep" @input="searchCEP"></el-input>
                     </el-form-item>
                     <el-form-item class="col-8 col-sm-8 col-md-6 col-lg-8 col-xl-6" label="Endereço" prop="endereco">
                         <el-input v-model="ruleForm.endereco"></el-input>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container" style="padding-top: 15px;" v-if="this.tipoCadastro == 'Solicitador'">
+            <div class="container" style="padding-top: 15px;" v-if="this.tipoCadastro == 'Solicitador'" :key="k2">
                 <el-form :model="ruleFormPJ" :rules="rulespj" ref="rulespj" class="demo-ruleForm form-row">
                     <el-form-item class="col-xl-8" label="Nome Completo" prop="nomepj">
                         <el-input v-model="ruleFormPJ.nomepj"></el-input>
@@ -94,7 +94,7 @@
                         <el-input v-mask="['(##) ####-####', '(##) #####-####']" v-model="ruleFormPJ.telefonepj"></el-input>
                     </el-form-item>
                     <el-form-item class="col-4 col-sm-6 col-md-3 col-lg-6 col-xl-4" label="CEP" prop="ceppj">
-                        <el-input v-mask="'#####-###'" v-model="ruleFormPJ.ceppj" @input="searchCEP"></el-input>
+                        <el-input v-mask="'#####-###'" v-model="ruleFormPJ.ceppj" @input="searchCEPPJ"></el-input>
                     </el-form-item>
                     <el-form-item class="col-8 col-sm-8 col-md-6 col-lg-8 col-xl-5" label="Endereço" prop="enderecopj">
                         <el-input type="text" v-model="ruleFormPJ.enderecopj"></el-input>
@@ -151,6 +151,8 @@ import Api from './cadastroService'
 export default {
     data() {
         return {
+            k1: 0,
+            k2: 0,
             tipoCadastro: "Prestador",
             loading: false,
             ruleForm: {
@@ -327,6 +329,14 @@ export default {
             }
         }
     },
+    watch: {
+        tipoCadastro(){
+            this.k1 ++
+            this.k2 ++
+            // this.ruleForm = {}
+            // this.ruleFormPJ = {}
+        }
+    },
     methods: {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
@@ -340,7 +350,6 @@ export default {
         submitFormPJ(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    console.log(this.ruleFormPJ);
                     this.registerSolicitador(this.ruleFormPJ)
                 } else {
                     return false;
@@ -349,19 +358,19 @@ export default {
         },
         searchCEP() {
             if (/\d{5}\-\d{3}/.test(this.ruleForm.cep)) {
-                Api.getCEP(this.ruleForm.cep).then((data) => {
-                    this.ruleForm.endereco = data.logradouro;
-                    this.ruleForm.cidade = data.localidade;
-                    this.ruleForm.bairro = data.bairro;
+                Api.getCEP(this.ruleForm.cep).then((response) => {
+                    this.ruleForm.endereco = response.logradouro;
+                    this.ruleForm.cidade = response.localidade;
+                    this.ruleForm.bairro = response.bairro;
                 });
             }
         },
         searchCEPPJ() {
-            if (/\d{5}\-\d{3}/.test(this.ruleForm.cep)) {
-                Api.getCEP(this.ruleForm.cep).then((data) => {
-                    this.ruleFormPJ.endereco = data.logradouro;
-                    this.ruleFormPJ.cidade = data.localidade;
-                    this.ruleFormPJ.bairro = data.bairro;
+            if (/\d{5}\-\d{3}/.test(this.ruleFormPJ.ceppj)) {
+                Api.getCEP(this.ruleFormPJ.ceppj).then((response) => {
+                    this.ruleFormPJ.enderecopj = response.logradouro;
+                    this.ruleFormPJ.cidadepj = response.localidade;
+                    this.ruleFormPJ.bairropj = response.bairro;
                 });
             }
         },
@@ -431,7 +440,7 @@ export default {
                     type: "error",
                 });
             })
-        },
+        }
     }
 }
 </script>

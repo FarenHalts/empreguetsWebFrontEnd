@@ -13,7 +13,6 @@ import 'primeicons/primeicons.css';
 Vue.component('Calendar', Calendar);
 //Fim Importação Prime Vue (Calendar)
 
-
 //importação Element
 import locale from "element-ui/lib/locale/lang/pt-br";
 
@@ -24,7 +23,7 @@ import ElementUI from "element-ui";
 import { Loading } from "element-ui";
 
 import * as VueGoogleMaps from 'vue2-google-maps'
- 
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: process.env.VUE_APP_KEY_MAPS,
@@ -32,7 +31,7 @@ Vue.use(VueGoogleMaps, {
   },
 })
 
-Vue.use(ElementUI, {locale});
+Vue.use(ElementUI, { locale });
 
 //fim importação Element
 
@@ -55,18 +54,17 @@ new Vue({
   router,
   store,
 
-  created(){
+  created() {
     this.logMain()
   },
 
-methods:{
-  logMain(){
-    console.log('carregando a main');
-  }
-},
-mounted() {
-  loadingInstance.close();
-},
+  methods: {
+    logMain() {
+    }
+  },
+  mounted() {
+    loadingInstance.close();
+  },
 
   render: h => h(App)
 }).$mount('#app')

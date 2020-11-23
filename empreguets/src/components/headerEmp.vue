@@ -18,7 +18,7 @@
                         <div @click="$router.push('/historico')">
                             <div>{{this.$store.getters.userData.nome}}</div>
                         </div>
-                        <div>
+                        <div @click="$router.push('/meuperfil')">
                             <div>Meu Perfil</div>
                         </div>
                         <div @click="$router.push('/historico')">
