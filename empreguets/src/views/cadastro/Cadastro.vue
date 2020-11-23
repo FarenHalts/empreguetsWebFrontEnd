@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="container" style="padding-top: 15px;" v-if="this.tipoCadastro == 'Solicitador'" :key="k2">
-                <el-form :model="ruleFormPJ" :rules="rulespj" ref="rulespj" class="demo-ruleForm form-row">
+                <el-form :model="ruleFormPJ" :rules="rulespj" ref="ruleFormPJ" class="demo-ruleForm form-row">
                     <el-form-item class="col-xl-8" label="Nome Completo" prop="nomepj">
                         <el-input v-model="ruleFormPJ.nomepj"></el-input>
                     </el-form-item>
@@ -136,7 +136,7 @@
                 <div class="row justify-content-center" style="padding-top: 10px;">
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-5">
                         <div class="infosLogin">
-                            <el-button style="width: 100%" type="primary" @click="submitFormPJ('ruleFormPJ')">Cadastrar<i class="el-icon-right" style="padding-left: 10px;"></i></el-button>
+                            <el-button style="width: 100%" type="primary" @click="submitFormPj('ruleFormPJ')">Cadastrar<i class="el-icon-right" style="padding-left: 10px;"></i></el-button>
                         </div>
                     </div>
                 </div>
@@ -347,7 +347,7 @@ export default {
                 }
             });
         },
-        submitFormPJ(formName) {
+        submitFormPj(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     this.registerSolicitador(this.ruleFormPJ)
@@ -383,7 +383,7 @@ export default {
                 cep: form.cep,
                 endereco: form.endereco,
                 bairro: form.bairro,
-                num_endereco: form.numeroEndereco,
+                num_endereco: form.numeroendereco,
                 complemento: form.complemento,
                 foto: form.foto,
                 tipo_usuario: this.tipoCadastro,
