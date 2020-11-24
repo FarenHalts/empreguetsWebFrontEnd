@@ -16,19 +16,36 @@
                 <div>
                     <el-popover style="cursor: pointer">
                         <div @click="$router.push('/historico')">
-                            <div>{{this.$store.getters.userData.nome}}</div>
+                            <div class="profileMenuTitle">{{this.$store.getters.userData.nome}}</div>
                         </div>
                         <div @click="$router.push('/meuperfil')">
-                            <div>Meu Perfil</div>
+                            <div class="profileMenu"><i class="el-icon-user menuIcons"></i>
+                                <span class="alignMenu">
+
+                                    Meu Perfil
+                                </span>
+                            </div>
                         </div>
                         <div @click="$router.push('/historico')">
-                            <div>Histórico de Solicitações</div>
+                            <div class="profileMenu"><i class="el-icon-tickets menuIcons"></i>
+                                <span class="alignMenu">
+                                    Histórico de Solicitações
+                                </span>
+                            </div>
                         </div>
                         <div @click="$router.push('/grafico')">
-                            <div>Estatísticas</div>
+                            <div class="profileMenu"><i class="el-icon-s-data menuIcons"></i>
+                                <span class="alignMenu">
+                                    Estatísticas
+                                </span>
+                            </div>
                         </div>
                         <div @click="logout()">
-                            <div>Sair</div>
+                            <div class="profileMenuExit"><i class="el-icon-arrow-right menuIconsExit"></i>
+                                <span class="alignMenu">
+                                    Sair
+                                </span>
+                            </div>
                         </div>
                         <div slot="reference">
                             <img :src="this.$store.getters.userData.foto" alt="" width="45" style="border-radius: 50px; border: 1px solid #f0f0f0;">
@@ -143,7 +160,7 @@ export default {
                 }
             })
         },
-        logout(){
+        logout() {
             localStorage.clear();
             this.$router.push('/login')
         }
@@ -202,5 +219,54 @@ export default {
     margin-right: 15px;
     color: #44CF6C;
     cursor: pointer;
+}
+
+.profileMenu {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-family: RobotoRegular;
+}
+
+.profileMenuExit {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-family: RobotoRegular;
+    color: #FF0035;
+}
+.profileMenuExit:hover {
+    color: #e2022f;
+}
+
+.profileMenuTitle {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-family: RobotoRegular;
+    text-align: center;
+    font-weight: 600;
+}
+
+.profileMenu:hover {
+    color: #bcc2ce;
+}
+
+.menuIcons {
+    font-size: 24px;
+}
+
+.menuIconsExit {
+    font-size: 24px;
+    color: #FF0035;
+}
+
+.menuIconsExit:hover {
+    color: #e2022f;
+}
+
+.alignMenu {
+    position: relative;
+    bottom: 5px;
 }
 </style>
