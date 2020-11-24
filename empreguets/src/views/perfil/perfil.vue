@@ -2,7 +2,7 @@
 <div>
     <div class="row containerProfile">
         <div>
-            <img class="profileImage" src="../homeScreen/unnamed.png" alt="fotoPerfil" />
+            <img class="profileImage" :src="this.foto" alt="fotoPerfil" />
         </div>
         <div>
             <div style="display: flex">
@@ -53,18 +53,22 @@
     <div class="containerProfile">
         <h3 class="ratesTitle" v-if="rates.length > 0">Avaliações Recentes</h3>
         <div v-for="(item, index) in rates" :key="index">
-            <div style="display: flex; justify-content: center">
-                <div class="roundedAvatarRates">
-                    <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="70" width="70" />
-                </div>
-                <div>
-                    <div style="display: flex">
-                        <span class="titlesNameRates">{{ item.nome }}</span>
-                        <el-rate v-model="item.avaliacao" class="alignRatingStarts" disabled disabled-void-color="#f0f0f0" :colors="colors">
-                        </el-rate>
+            <div class="container-fluid pt-1">
+                <div class="row" style="justify-content: center !important;">
+                    <div class="roundedAvatarRates" style="position: relative;">
+                        <img :src="item.foto" height="70" width="70" />
                     </div>
-                    <div class="titlesCommentRates">
-                        <span>{{ '"' + item.comentario + '"' }}</span>
+                    <div>
+                        <div class="rateSize">
+                            <div style="display: flex">
+                                <span class="titlesNameRates">{{ item.nome }}</span>
+                                <el-rate v-model="item.avaliacao" class="alignRatingStarts" disabled disabled-void-color="#f0f0f0" :colors="colors">
+                                </el-rate>
+                            </div>
+                            <div class="titlesCommentRates">
+                                <span>{{ '"' + item.comentario + '"' }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,6 +124,7 @@ export default {
             colors: ["#FFC857", " #FFC857", " #FFC857"],
             nome: "",
             descricao: "",
+            foto: "",
             bairro: "",
             valor: "",
             rates: [],
@@ -145,7 +150,7 @@ export default {
         }
     },
     watch: {
-        dialogVisible(){
+        dialogVisible() {
             if (this.dialogVisible == false) {
                 this.serviceDate = null;
                 this.novoValor = "";
@@ -162,6 +167,7 @@ export default {
             (this.bairro = data.bairro),
             (this.telefone = data.telefone),
             (this.valor = data.valor_servico);
+            (this.foto = data.foto);
         },
         loadRates(id) {
             Api.getRates(id, localStorage.getItem("token")).then((response) => {
@@ -302,5 +308,18 @@ export default {
     font-family: RobotoRegular;
     color: #bcbcbc;
     margin-top: 5px;
+    max-width: 100%;
+}
+
+.styleRat {
+    display: flex;
+    /* margin-left: 20%; */
+    justify-content: center;
+}
+
+.rateSize {
+    max-width: 300px;
+    min-width: 300px;
+    width: 100%;
 }
 </style>

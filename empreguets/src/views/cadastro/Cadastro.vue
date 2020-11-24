@@ -375,6 +375,7 @@ export default {
             }
         },
         registerPrestador(form) {
+            let unformatValue = form.valor.replaceAll('R$', '');
             let data = {
                 nome: form.nome,
                 email: form.email,
@@ -390,7 +391,7 @@ export default {
                 cpf: form.cpf,
                 rg: form.rg,
                 data_nascimento: form.datanascimento,
-                valor_servico: form.valor,
+                valor_servico: unformatValue,
                 raio: form.raio,
                 descricao_perfil: ''
             }
@@ -410,6 +411,7 @@ export default {
             })
         },
         registerSolicitador(form) {
+            let unformatValue = form.valorpj.replaceAll('R$', '');
             let data = {
                 nome: form.nomepj,
                 email: form.emailpj,
@@ -423,7 +425,7 @@ export default {
                 foto: form.foto,
                 tipo_usuario: this.tipoCadastro,
                 documento: form.documentopj,
-                valor_servico: form.valorpj,
+                valor_servico: unformatValue,
                 descricao_perfil: ''
             }
             Api.registerSolicitador(data).then(response => {

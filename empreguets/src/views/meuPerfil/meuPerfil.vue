@@ -5,7 +5,7 @@
     </div>
     <div class="row containerProfile">
         <div>
-            <img class="profileImage" src="../homeScreen/unnamed.png" alt="fotoPerfil" />
+            <img class="profileImage" :src="this.foto" alt="fotoPerfil" />
         </div>
         <div>
             <div style="display: flex">
@@ -45,7 +45,7 @@
                     <span>Valor Diária</span>
                 </div>
                 <div class="profileData">
-                    <span>{{ "R$" + this.valor + ".00"}}</span>
+                    <span>{{ "R$" + this.valor + ".00" }}</span>
                 </div>
             </div>
             <div class="services">
@@ -54,20 +54,24 @@
         </div>
     </div>
     <div class="containerProfile">
-        <h3 class="ratesTitle" v-if="rates.length > 0">Avaliações Recentes</h3>
+        <h3 class="ratesTitle pb-3" v-if="rates.length > 0">Avaliações Recentes</h3>
         <div v-for="(item, index) in rates" :key="index">
-            <div style="display: flex; justify-content: center">
-                <div class="roundedAvatarRates">
-                    <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="70" width="70" />
-                </div>
-                <div>
-                    <div style="display: flex">
-                        <span class="titlesNameRates">{{ item.nome }}</span>
-                        <el-rate v-model="item.avaliacao" class="alignRatingStarts" disabled disabled-void-color="#f0f0f0" :colors="colors">
-                        </el-rate>
+            <div class="container-fluid pt-1">
+                <div class="row" style="justify-content: center !important;">
+                    <div class="roundedAvatarRates">
+                        <img :src="item.foto" height="70" width="70" />
                     </div>
-                    <div class="titlesCommentRates">
-                        <span>{{ '"' + item.comentario + '"' }}</span>
+                    <div>
+                        <div class="rateSize">
+                            <div style="display: flex">
+                                <span class="titlesNameRates">{{ item.nome }}</span>
+                                <el-rate v-model="item.avaliacao" class="alignRatingStarts" disabled disabled-void-color="#f0f0f0" :colors="colors">
+                                </el-rate>
+                            </div>
+                            <div class="titlesCommentRates">
+                                <span>{{ '"' + item.comentario + '"' }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,10 +124,9 @@
                         <el-input disabled v-model="ruleForm.tipo_usuario"></el-input>
                     </el-form-item>
                     <div class="container">
-                        <div class="row form-row" style="justify-content: center;">
+                        <div class="row form-row" style="justify-content: center">
                             <div class="roundedAvatar">
-                                <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="100" width="100">
-
+                                <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="100" width="100" />
                             </div>
                             <div class="col-12 col-sm-6 col-md-5 col-xl-5">
                                 <div class="row">
@@ -180,9 +183,9 @@
                         <el-input v-model="ruleFormPJ.bairropj"></el-input>
                     </el-form-item>
                     <div class="container">
-                        <div class="row form-row" style="justify-content: center;">
+                        <div class="row form-row" style="justify-content: center">
                             <div class="roundedAvatar">
-                                <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="100" width="100">
+                                <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="100" width="100" />
                             </div>
                             <div class="col-12 col-sm-6 col-md-5 col-xl-5">
                                 <div class="row">
@@ -208,8 +211,8 @@
 </template>
 
 <script>
-import api from './selfProfileService'
-import cep from '../cadastro/cadastroService'
+import api from "./selfProfileService";
+import cep from "../cadastro/cadastroService";
 import moment from "moment";
 export default {
     data() {
@@ -217,63 +220,64 @@ export default {
             value: null,
             nome: "",
             descricao: "",
+            foto: "",
             bairro: "",
             valor: "",
             rates: [],
             profile: [],
             editDiloag: false,
             ruleForm: {
-                nome: '',
-                cpf: '',
-                email: '',
-                senha: '',
-                rg: '',
-                datanascimento: '',
-                telefone: '',
-                cep: '',
-                endereco: '',
-                numeroendereco: '',
-                complemento: '',
+                nome: "",
+                cpf: "",
+                email: "",
+                senha: "",
+                rg: "",
+                datanascimento: "",
+                telefone: "",
+                cep: "",
+                endereco: "",
+                numeroendereco: "",
+                complemento: "",
                 // cidade: '',
-                bairro: '',
-                valor: '',
-                raio: '',
-                foto: '',
-                tipo_usuario: '',
-                descricao_perfil: ''
+                bairro: "",
+                valor: "",
+                raio: "",
+                foto: "",
+                tipo_usuario: "",
+                descricao_perfil: "",
             },
             ruleFormPJ: {
-                nomepj: '',
-                documentopj: '',
-                telefonepj: '',
-                ceppj: '',
-                enderecopj: '',
-                numeroenderecopj: '',
+                nomepj: "",
+                documentopj: "",
+                telefonepj: "",
+                ceppj: "",
+                enderecopj: "",
+                numeroenderecopj: "",
                 // cidadepj: '',
-                complementopj: '',
-                bairropj: '',
-                emailpj: '',
-                senhapj: '',
-                valorpj: '',
-                foto: '',
-                tipo_usuario: '',
-                descricao_perfil: ''
+                complementopj: "",
+                bairropj: "",
+                emailpj: "",
+                senhapj: "",
+                valorpj: "",
+                foto: "",
+                tipo_usuario: "",
+                descricao_perfil: "",
             },
             rules: {
                 nome: [{
                     required: true,
-                    message: 'Nome inválido.',
-                    trigger: 'blur'
+                    message: "Nome inválido.",
+                    trigger: "blur",
                 }, ],
                 cpf: [{
                     required: true,
-                    message: 'CPF inválido.',
-                    trigger: 'blur'
+                    message: "CPF inválido.",
+                    trigger: "blur",
                 }, ],
                 email: [{
                     required: true,
-                    message: 'E-mail inválido.',
-                    trigger: 'blur'
+                    message: "E-mail inválido.",
+                    trigger: "blur",
                 }, ],
                 // senha: [{
                 //     required: true,
@@ -282,37 +286,37 @@ export default {
                 // }, ],
                 rg: [{
                     required: true,
-                    message: 'RG inválido.',
+                    message: "RG inválido.",
                     // trigger: 'blur'
                 }, ],
                 datanascimento: [{
                     required: true,
-                    message: 'Data de Nascimento inválida.',
+                    message: "Data de Nascimento inválida.",
                     // trigger: 'blur'
                 }, ],
                 telefone: [{
                     required: true,
-                    message: 'Número inválido.',
+                    message: "Número inválido.",
                     // trigger: 'blur'
                 }, ],
                 cep: [{
                     required: true,
-                    message: 'CEP inválido.',
+                    message: "CEP inválido.",
                     // trigger: 'blur'
                 }, ],
                 endereco: [{
                     required: true,
-                    message: 'Endereço inválido.',
+                    message: "Endereço inválido.",
                     // trigger: 'blur'
                 }, ],
                 numeroendereco: [{
                     required: true,
-                    message: 'Número inválido.',
+                    message: "Número inválido.",
                     // trigger: 'blur'
                 }, ],
                 complemento: [{
                     required: false,
-                    message: 'Número inválido.',
+                    message: "Número inválido.",
                     // trigger: 'blur'
                 }, ],
                 // cidade: [{
@@ -322,64 +326,64 @@ export default {
                 // }, ],
                 bairro: [{
                     required: true,
-                    message: 'Bairro inválido.',
+                    message: "Bairro inválido.",
                     // trigger: 'blur'
                 }, ],
                 valor: [{
                     required: true,
-                    message: 'Valor inválido.',
+                    message: "Valor inválido.",
                     // trigger: 'blur'
                 }, ],
                 raio: [{
                     required: true,
-                    message: 'Raio inválido.',
+                    message: "Raio inválido.",
                     // trigger: 'blur'
                 }, ],
             },
             rulespj: {
                 nomepj: [{
                     required: true,
-                    message: 'Nome inválido.',
+                    message: "Nome inválido.",
                     // trigger: 'blur'
                 }, ],
                 documentopj: [{
                     required: true,
-                    message: 'Documento inválido.',
+                    message: "Documento inválido.",
                     // trigger: 'blur'
                 }, ],
                 emailpj: [{
                     required: true,
-                    message: 'E-mail inválido.',
+                    message: "E-mail inválido.",
                     // trigger: 'blur'
                 }, ],
                 senhapj: [{
                     required: true,
-                    message: 'Senha inválida.',
+                    message: "Senha inválida.",
                     // trigger: 'blur'
                 }, ],
                 telefonepj: [{
                     required: true,
-                    message: 'Número inválido.',
+                    message: "Número inválido.",
                     // trigger: 'blur'
                 }, ],
                 ceppj: [{
                     required: true,
-                    message: 'CEP inválido.',
+                    message: "CEP inválido.",
                     // trigger: 'blur'
                 }, ],
                 enderecopj: [{
                     required: true,
-                    message: 'Endereço inválido.',
+                    message: "Endereço inválido.",
                     // trigger: 'blur'
                 }, ],
                 numeroenderecopj: [{
                     required: true,
-                    message: 'Número inválido.',
+                    message: "Número inválido.",
                     // trigger: 'blur'
                 }, ],
                 complementopj: [{
                     required: false,
-                    message: 'Número inválido.',
+                    message: "Número inválido.",
                     // trigger: 'blur'
                 }, ],
                 // cidadepj: [{
@@ -389,17 +393,17 @@ export default {
                 // }, ],
                 bairropj: [{
                     required: true,
-                    message: 'Bairro inválido.',
+                    message: "Bairro inválido.",
                     // trigger: 'blur'
                 }, ],
                 valorpj: [{
                     required: true,
-                    message: 'Valor inválido.',
+                    message: "Valor inválido.",
                     // trigger: 'blur'
                 }, ],
             },
             colors: ["#FFC857", " #FFC857", " #FFC857"],
-            modalKey: 0
+            modalKey: 0,
         };
     },
     created() {
@@ -412,7 +416,7 @@ export default {
                 this.serviceDate = null;
                 this.novoValor = "";
             }
-        }
+        },
     },
     methods: {
         loadingDataProfile(data) {
@@ -424,6 +428,7 @@ export default {
             (this.bairro = data.bairro),
             (this.telefone = data.telefone),
             (this.valor = data.valor_servico);
+            (this.foto = data.foto);
         },
         loadRates(id) {
             api.getRates(id, localStorage.getItem("token")).then((response) => {
@@ -435,14 +440,14 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.updatePrestador(this.ruleForm)
+                    this.updatePrestador(this.ruleForm);
                 } else {
                     return false;
                 }
             });
         },
         submitFormPJ(formName) {
-            this.updateSolicitador(this.$store.getters.userData)
+            this.updateSolicitador(this.$store.getters.userData);
             // this.$refs[formName].validate((valid) => {
             //     if (valid) {
             //         this.updateSolicitador(this.$store.getters.userData)
@@ -452,13 +457,13 @@ export default {
             // });
         },
         updatePrestador(form) {
-            let unformatCpf = form.cpf.replace(/[^\w\s]/gi, '');
-            let unformatCep = form.cep.replace(/[^\w\s]/gi, '');
-            let unformatValue = form.valor.replaceAll('R$', '');
-            let unformatDistance = form.raio.replaceAll('Km', '');
-            let password = ''
+            let unformatCpf = form.cpf.replace(/[^\w\s]/gi, "");
+            let unformatCep = form.cep.replace(/[^\w\s]/gi, "");
+            let unformatValue = form.valor.replaceAll("R$", "");
+            let unformatDistance = form.raio.replaceAll("Km", "");
+            let password = "";
             if (form.senha) {
-                password = form.senha
+                password = form.senha;
             }
             let data = {
                 nome: form.nome,
@@ -470,31 +475,36 @@ export default {
                 bairro: form.bairro,
                 num_endereco: form.numeroendereco,
                 complemento: form.complemento,
-                descricao_perfil: '',
+                descricao_perfil: "",
                 foto: form.foto,
                 tipo_usuario: this.$store.getters.userData.tipo_usuario,
                 cpf: unformatCpf,
                 rg: form.rg,
-                data_nascimento: moment(form.datanascimento, 'DD/MM/YYY').format('DD-MM-YYYY'),
+                data_nascimento: moment(form.datanascimento, "DD/MM/YYY").format(
+                    "DD-MM-YYYY"
+                ),
                 valor_servico: unformatValue,
                 raio: unformatDistance,
-                id_usuario: this.$store.getters.userData.id_usuario.toString()
-            }
-            api.updatePrestador(data, localStorage.getItem("token")).then(response => {
-                if (response.data.status == 'SUCCESS') {
+                id_usuario: this.$store.getters.userData.id_usuario.toString(),
+            };
+            api
+                .updatePrestador(data, localStorage.getItem("token"))
+                .then((response) => {
+                    if (response.data.status == "SUCCESS") {
+                        this.$message({
+                            message: response.data.message,
+                            type: "success",
+                        });
+                        this.editDiloag = false;
+                        location.reload();
+                    }
+                })
+                .catch((err) => {
                     this.$message({
-                        message: response.data.message,
-                        type: "success",
+                        message: err.response.data.message,
+                        type: "error",
                     });
-                    this.editDiloag = false;
-                    location.reload();
-                }
-            }).catch(err => {
-                this.$message({
-                    message: err.response.data.message,
-                    type: "error",
                 });
-            })
         },
         updateSolicitador(form) {
             // let data = {
@@ -552,25 +562,28 @@ export default {
             let cepFormated = data.cep.replace(re, "$1.$2");
             let cp = /^([\d]{3})\.?([\d]{3})\.?([\d]{3})\-?([\d]{2})/;
             let cpfFormated = data.cpf.replace(cp, "$1.$2-$3-$4");
-            this.ruleForm.nome = data.nome,
-                this.ruleForm.email = data.email,
-                this.ruleForm.telefone = data.telefone,
-                // this.ruleForm.cep = data.cep,
-                this.ruleForm.cep = cepFormated,
-                this.ruleForm.endereco = data.endereco,
-                this.ruleForm.bairro = data.bairro,
-                this.ruleForm.numeroendereco = data.num_endereco,
-                this.ruleForm.complemento = data.complemento,
-                this.ruleForm.foto = data.foto,
-                this.ruleForm.tipo_usuario = data.tipo_usuario,
-                this.ruleForm.cpf = cpfFormated,
-                this.ruleForm.rg = data.rg,
-                this.ruleForm.datanascimento = moment(data.data_nascimento, 'DD-MM-YYYY').format('DD/MM/YYYY'),
-                this.ruleForm.valor = "R$" + data.valor_servico,
-                this.ruleForm.raio = data.raio + "Km",
-                this.ruleForm.descricao_perfil = ''
+            (this.ruleForm.nome = data.nome),
+            (this.ruleForm.email = data.email),
+            (this.ruleForm.telefone = data.telefone),
+            // this.ruleForm.cep = data.cep,
+            (this.ruleForm.cep = cepFormated),
+            (this.ruleForm.endereco = data.endereco),
+            (this.ruleForm.bairro = data.bairro),
+            (this.ruleForm.numeroendereco = data.num_endereco),
+            (this.ruleForm.complemento = data.complemento),
+            (this.ruleForm.foto = data.foto),
+            (this.ruleForm.tipo_usuario = data.tipo_usuario),
+            (this.ruleForm.cpf = cpfFormated),
+            (this.ruleForm.rg = data.rg),
+            (this.ruleForm.datanascimento = moment(
+                data.data_nascimento,
+                "DD-MM-YYYY"
+            ).format("DD/MM/YYYY")),
+            (this.ruleForm.valor = "R$" + data.valor_servico),
+            (this.ruleForm.raio = data.raio + "Km"),
+            (this.ruleForm.descricao_perfil = "");
             this.editDiloag = true;
-        }
+        },
     },
 };
 </script>
@@ -666,6 +679,7 @@ export default {
     font-family: RobotoRegular;
     color: #bcbcbc;
     margin-top: 5px;
+    max-width: 100%;
 }
 
 .selfProfileTitle {
@@ -685,5 +699,17 @@ export default {
 .penStyle:hover {
     color: #c0bdbd;
     cursor: pointer;
+}
+
+.styleRat {
+    display: flex;
+    /* margin-left: 20%; */
+    justify-content: center;
+}
+
+.rateSize {
+    max-width: 300px;
+    min-width: 300px;
+    width: 100%;
 }
 </style>

@@ -31,7 +31,7 @@
                             <div>Sair</div>
                         </div>
                         <div slot="reference">
-                            <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" alt="" width="45" style="border-radius: 50px; border: 1px solid #f0f0f0;">
+                            <img :src="this.$store.getters.userData.foto" alt="" width="45" style="border-radius: 50px; border: 1px solid #f0f0f0;">
                         </div>
                     </el-popover>
                 </div>
