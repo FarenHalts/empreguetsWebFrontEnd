@@ -253,11 +253,11 @@ export default {
 }
 
 .menuIcons {
-    font-size: 24px;
+    font-size: 15px;
 }
 
 .menuIconsExit {
-    font-size: 24px;
+    font-size: 15px;
     color: #FF0035;
 }
 
@@ -267,6 +267,6 @@ export default {
 
 .alignMenu {
     position: relative;
-    bottom: 5px;
+    bottom: 2px;
 }
 </style>

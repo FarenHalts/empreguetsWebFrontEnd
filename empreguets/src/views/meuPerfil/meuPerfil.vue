@@ -126,7 +126,7 @@
                     <div class="container">
                         <div class="row form-row" style="justify-content: center">
                             <div class="roundedAvatar">
-                                <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="100" width="100" />
+                                <img :src="this.$store.getters.userData.foto" height="100" width="100" />
                             </div>
                             <div class="col-12 col-sm-6 col-md-5 col-xl-5">
                                 <div class="row">
@@ -185,7 +185,7 @@
                     <div class="container">
                         <div class="row form-row" style="justify-content: center">
                             <div class="roundedAvatar">
-                                <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="100" width="100" />
+                                <img :src="this.$store.getters.userData.foto" height="100" width="100" />
                             </div>
                             <div class="col-12 col-sm-6 col-md-5 col-xl-5">
                                 <div class="row">

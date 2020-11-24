@@ -58,7 +58,7 @@
                     <div class="container">
                         <div class="row form-row" style="justify-content: center;">
                             <div class="roundedAvatar">
-                                <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="100" width="100">
+                                <img src="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/user.png?alt=media&token=65caf39f-546f-4a36-8c71-638e7d265197" height="100" width="100">
 
                             </div>
                             <div class="col-12 col-sm-6 col-md-5 col-xl-5">
@@ -117,7 +117,7 @@
                     <div class="container">
                         <div class="row form-row" style="justify-content: center;">
                             <div class="roundedAvatar">
-                                <img src="https://i.pinimg.com/736x/05/85/58/058558945fea564ab0a75106bee2b99e.jpg" height="100" width="100">
+                                <img src="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/user.png?alt=media&token=65caf39f-546f-4a36-8c71-638e7d265197" height="100" width="100">
 
                             </div>
                             <div class="col-12 col-sm-6 col-md-5 col-xl-5">
@@ -386,7 +386,7 @@ export default {
                 bairro: form.bairro,
                 num_endereco: form.numeroendereco,
                 complemento: form.complemento,
-                foto: form.foto,
+                foto: 'https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/dona%20zilda.png?alt=media&token=fa868b06-ed3d-4772-9b52-cc47354d7edc',
                 tipo_usuario: this.tipoCadastro,
                 cpf: form.cpf,
                 rg: form.rg,
@@ -422,7 +422,7 @@ export default {
                 bairro: form.bairropj,
                 num_endereco: form.numeroenderecopj,
                 complemento: form.complementopj,
-                foto: form.foto,
+                foto: 'https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/chester.png?alt=media&token=1b9467f1-33d8-4ad8-bd15-e2d8442c7278',
                 tipo_usuario: this.tipoCadastro,
                 documento: form.documentopj,
                 valor_servico: unformatValue,

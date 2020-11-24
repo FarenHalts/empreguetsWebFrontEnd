@@ -34,7 +34,7 @@
             </div>
         </div>
         <div style="text-align: center; padding-top: 15px;">
-            <h3 class="infosAbaixoLogin">Ainda não possui um cadastro?</h3>
+            <h3 class="infosAbaixoLogin" style="cursor: pointer" @click="$router.push('/cadastro')">Ainda não possui um cadastro?</h3>
             <h3 class="infosAbaixoLogin">Esqueci a senha</h3>
         </div>
 
