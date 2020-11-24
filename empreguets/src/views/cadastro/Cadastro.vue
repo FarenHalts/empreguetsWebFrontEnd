@@ -393,7 +393,7 @@ export default {
                 data_nascimento: form.datanascimento,
                 valor_servico: unformatValue,
                 raio: form.raio,
-                descricao_perfil: ''
+                descricao_perfil: 'Eu amo meus netinhos, não lavo louça, só seco'
             }
             Api.registerPrestador(data).then(response => {
                 if (response.data.status == 'SUCCESS') {
@@ -426,7 +426,7 @@ export default {
                 tipo_usuario: this.tipoCadastro,
                 documento: form.documentopj,
                 valor_servico: unformatValue,
-                descricao_perfil: ''
+                descricao_perfil: 'Não estarei em casa'
             }
             Api.registerSolicitador(data).then(response => {
                 if (response.data.status == 'SUCCESS') {

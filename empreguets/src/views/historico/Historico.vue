@@ -134,6 +134,10 @@ export default {
                     if (response.status == 200) {
                         this.listServices()
                         this.dialogVisible = false;
+                        this.$message({
+                            message: response.data.message,
+                            type: "success",
+                        });
                     }
                 }).catch(err => {
                     if (err.response.status == 400) {
