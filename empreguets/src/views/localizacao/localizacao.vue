@@ -13,7 +13,7 @@
             <GmapMap
                 class="mapStyle"
                 :center="{lat:-25.5065, lng:-49.2641}"
-                :zoom="14"
+                :zoom="11"
                 map-type-id="roadmap"
                 >
                 <GmapMarker
@@ -21,6 +21,8 @@
                     v-for="(m, index) in markers"
                     :position="m.position"
                     :clickable="true"
+                    @click="logItem(m)"
+                    icon="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/icons%2Fplaceholder.png?alt=media&token=b001d7e8-19f2-407f-880a-ae0656f05d72" 
                 />
             </GmapMap>
 
@@ -33,7 +35,21 @@
 export default {
     data() {
         return {
-            search: ''
+            search: '',
+            markers: [
+                {
+                    position: { lat: -25.5338137, lng: -49.2494014 },
+                    user: {nome: 3}
+                },
+                {
+                    position: { lat: -25.4818, lng: -49.2468 }
+                }
+            ]
+        }
+    },
+    methods: {
+        logItem(item){
+            console.log(item)
         }
     }
 }
