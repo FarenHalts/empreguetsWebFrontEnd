@@ -38,12 +38,15 @@ export default {
             search: '',
             markers: [
                 {
-                    position: { lat: -25.5338137, lng: -49.2494014 },
+                    position: { lat: -25.5338, lng: -49.2494 },
                     user: {nome: 3}
                 },
                 {
-                    position: { lat: -25.4818, lng: -49.2468 }
-                }
+                    position: { lat: -25.5338137, lng: -49.2494014 }
+                },
+                {
+                    position: { lat: -25.4809929, lng: -49.2994652 }
+                },
             ]
         }
     },

@@ -326,7 +326,9 @@ export default {
                     message: 'Valor inválido.',
                     // trigger: 'blur'
                 }, ],
-            }
+            },
+            latitude: '',
+            longitude: ''
         }
     },
     watch: {
@@ -341,7 +343,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.registerPrestador(this.ruleForm)
+                    this.getLatLngPrest()
                 } else {
                     return false;
                 }
@@ -350,7 +352,7 @@ export default {
         submitFormPj(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.registerSolicitador(this.ruleFormPJ)
+                    this.getLatLngSoli()
                 } else {
                     return false;
                 }
@@ -393,7 +395,9 @@ export default {
                 data_nascimento: form.datanascimento,
                 valor_servico: unformatValue,
                 raio: form.raio,
-                descricao_perfil: 'Eu amo meus netinhos, não lavo louça, só seco'
+                descricao_perfil: 'Eu amo meus netinhos, não lavo louça, só seco',
+                latitude: this.latitude,
+                longitude: this.longitude
             }
             Api.registerPrestador(data).then(response => {
                 if (response.data.status == 'SUCCESS') {
@@ -426,7 +430,9 @@ export default {
                 tipo_usuario: this.tipoCadastro,
                 documento: form.documentopj,
                 valor_servico: unformatValue,
-                descricao_perfil: 'Não estarei em casa'
+                descricao_perfil: 'Não estarei em casa',
+                latitude: this.latitude,
+                longitude: this.longitude
             }
             Api.registerSolicitador(data).then(response => {
                 if (response.data.status == 'SUCCESS') {
@@ -441,6 +447,36 @@ export default {
                     message: err.response.data.message,
                     type: "error",
                 });
+            })
+        },
+        getLatLngPrest(){
+            let ruaNoCharac = this.ruleForm.endereco.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            let adressData = {
+                cep: this.ruleForm.cep.replaceAll('-', ''),
+                num: this.ruleForm.numeroendereco,
+                rua: ruaNoCharac.replaceAll(' ', "+")
+            }
+            Api.getLatLngPrest(adressData).then(response => {
+                if (response.status == 200) {
+                    this.latitude = response.data.features[0].geometry.coordinates[0];
+                    this.longitude = response.data.features[0].geometry.coordinates[1];
+                    this.registerPrestador(this.ruleForm)
+                }
+            })
+        },
+        getLatLngSoli(){
+            let ruaNoCharac = this.ruleFormPJ.enderecopj.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            let adressData = {
+                cep: this.ruleFormPJ.ceppj.replaceAll('-', ''),
+                num: this.ruleFormPJ.numeroenderecopj,
+                rua: ruaNoCharac.replaceAll(' ', "+")
+            }
+            Api.getLatLngPrest(adressData).then(response => {
+                if (response.status == 200) {
+                    this.latitude = response.data.features[0].geometry.coordinates[0];
+                    this.longitude = response.data.features[0].geometry.coordinates[1];
+                    this.registerSolicitador(this.ruleFormPJ)
+                }
             })
         }
     }
