@@ -396,8 +396,8 @@ export default {
                 valor_servico: unformatValue,
                 raio: form.raio,
                 descricao_perfil: 'Eu amo meus netinhos, não lavo louça, só seco',
-                latitude: this.latitude,
-                longitude: this.longitude
+                lat: this.latitude,
+                lng: this.longitude
             }
             Api.registerPrestador(data).then(response => {
                 if (response.data.status == 'SUCCESS') {
@@ -431,8 +431,8 @@ export default {
                 documento: form.documentopj,
                 valor_servico: unformatValue,
                 descricao_perfil: 'Não estarei em casa',
-                latitude: this.latitude,
-                longitude: this.longitude
+                lat: this.latitude,
+                lng: this.longitude
             }
             Api.registerSolicitador(data).then(response => {
                 if (response.data.status == 'SUCCESS') {
@@ -458,8 +458,8 @@ export default {
             }
             Api.getLatLngPrest(adressData).then(response => {
                 if (response.status == 200) {
-                    this.latitude = response.data.features[0].geometry.coordinates[0];
-                    this.longitude = response.data.features[0].geometry.coordinates[1];
+                    this.longitude = response.data.features[0].geometry.coordinates[0];
+                    this.latitude = response.data.features[0].geometry.coordinates[1];
                     this.registerPrestador(this.ruleForm)
                 }
             })
@@ -473,8 +473,8 @@ export default {
             }
             Api.getLatLngPrest(adressData).then(response => {
                 if (response.status == 200) {
-                    this.latitude = response.data.features[0].geometry.coordinates[0];
-                    this.longitude = response.data.features[0].geometry.coordinates[1];
+                    this.longitude = response.data.features[0].geometry.coordinates[0];
+                    this.latitude = response.data.features[0].geometry.coordinates[1];
                     this.registerSolicitador(this.ruleFormPJ)
                 }
             })

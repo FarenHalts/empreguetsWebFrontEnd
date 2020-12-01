@@ -19,7 +19,7 @@
                 <GmapMarker
                     :key="index"
                     v-for="(m, index) in markers"
-                    :position="m.position"
+                    :position="m"
                     :clickable="true"
                     @click="logItem(m)"
                     icon="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/icons%2Fplaceholder.png?alt=media&token=b001d7e8-19f2-407f-880a-ae0656f05d72" 
@@ -32,27 +32,49 @@
 </template>
 
 <script>
+import Api from './localizationService'
 export default {
     data() {
         return {
             search: '',
             markers: [
-                {
-                    position: { lat: -25.5338, lng: -49.2494 },
-                    user: {nome: 3}
-                },
-                {
-                    position: { lat: -25.5338137, lng: -49.2494014 }
-                },
-                {
-                    position: { lat: -25.4809929, lng: -49.2994652 }
-                },
+                // {
+                //     position: { lat: -25.518119054649656, lng: -49.255530194461585 },
+                //     user: {nome: 3}
+                // }
             ]
         }
+    },
+    created() {
+        this.getLocalizations()
     },
     methods: {
         logItem(item){
             console.log(item)
+        },
+        getLocalizations(){
+            if (this.$store.getters.userData.tipo_usuario == "Solicitador") {
+                Api.getPrestadoresLocalization(localStorage.getItem("token")).then(response => {
+                    if (response.status == 200) {
+                        console.log(response);
+                        this.markers = response.data.data
+                        this.markers.map(item => {
+                            console.log(item.lat.parseFloat());
+                        })
+                    }
+                })
+            } else {
+                Api.getSolicitadoresLocalization(localStorage.getItem("token")).then(response => {
+                    if (response.status == 200) {
+                        console.log(response);
+                        this.markers = response.data.data
+                        this.markers.map(item => {
+                            item.lat.parserFloat()
+                            item.lng.parserFloat()
+                        })
+                    }
+                })
+            }
         }
     }
 }
