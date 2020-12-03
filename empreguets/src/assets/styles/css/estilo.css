@@ -235,3 +235,21 @@ button:focus{
   margin-right: 15px;
   margin-left: 15px;
 }
+
+.p-datepicker-other-month .p-disabled{
+  opacity: 0.3 !important;
+  color: black;
+  background-color: unset;
+}
+.p-disabled{
+    opacity: unset !important;
+    background-color: #ED474A;
+    color: white;
+}
+
+.p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):focus{
+  box-shadow: unset !important;
+}
+.p-datepicker .p-disabled {
+  cursor: not-allowed;
+}

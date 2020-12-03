@@ -77,7 +77,11 @@
     <el-dialog title="Marcar Serviço" :visible.sync="dialogVisible" width="70%">
         <div class="row">
             <div class="col-6">
-                <Calendar v-model="serviceDate" :inline="true" :locale="pt" />
+                <Calendar v-model="serviceDate" :inline="true" :locale="pt" :disabledDates="invalidDates"/>
+            <div class="col-6 mt-2 containerBullet">
+                <div class="bullet"></div>
+                <div class="bulletWord">{{this.$store.getters.profileData.tipo_usuario + " indisponível"}}</div>
+            </div>
             </div>
             <div class="col-6">
                 <div>
@@ -140,13 +144,16 @@ export default {
                 monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
                 monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dec"],
                 today: 'Hoje'
-            }
+            },
+            reservedDates: [],
+            invalidDates: [],
         };
     },
     created() {
         if (this.$store.getters.profileData) {
             this.loadingDataProfile(this.$store.getters.profileData);
             this.loadRates(this.$store.getters.profileData.id_usuario);
+            this.loadReservedDates(this.$store.getters.profileData.id_usuario)
         }
     },
     watch: {
@@ -212,6 +219,18 @@ export default {
             } else {
                 return ''
             }
+        },
+        loadReservedDates(id){
+            apiService.reservedDates(id).then(response => {
+                if (response.status == 200) {
+                    this.reservedDates = response.data.data
+                    this.reservedDates.map(i => {
+                        console.log('a', i);
+                        i.data_servico = moment(i.data_servico, "DD/MM/YYYY").format("MM/DD/YYYY")
+                        this.invalidDates.push(new Date(i.data_servico))
+                    })
+                }
+            })
         }
     },
 };
@@ -321,5 +340,25 @@ export default {
     max-width: 300px;
     min-width: 300px;
     width: 100%;
+}
+
+.bullet{
+    border: 1px solid red;
+    border-radius: 20px;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.containerBullet{
+    padding: 0;
+    display: inline-flex;
+}
+
+.bulletWord{
+    font-family: RobotoRegular;
+    font-size: 14px;
 }
 </style>
