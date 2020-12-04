@@ -2,7 +2,19 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import firebase from 'firebase'
 import "../src/assets/styles/css/estilo.css";
+
+firebase.initializeApp({
+  apiKey: process.env.VUE_APP_FIREBASE_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_DOMAIN,
+  databaseURL: process.env.VUE_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FIREBASE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_FIREBASE_SENDER,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID,
+  measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT
+})
 
 //Importação Prime Vue (Calendar)
 import Calendar from 'primevue/calendar';

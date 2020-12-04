@@ -155,6 +155,8 @@ export default {
 .image {
     width: 100%;
     display: block;
+    width: 231px;
+    height: 237px;
 }
 
 .cards {

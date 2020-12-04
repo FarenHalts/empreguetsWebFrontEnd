@@ -257,7 +257,8 @@ export default {
     /* border: 6px solid #383838; */
     border-radius: 100%;
     margin-right: 20px;
-    width: 300px;
+    width: 231px;
+    height: 237px;
 }
 
 .nameProfile {

@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div slot="reference">
-                            <img :src="this.$store.getters.userData.foto" alt="" width="45" style="border-radius: 50px; border: 1px solid #f0f0f0;">
+                            <img class="profileImage" :src="this.$store.getters.userData.foto">
                         </div>
                     </el-popover>
                 </div>
@@ -268,5 +268,11 @@ export default {
 .alignMenu {
     position: relative;
     bottom: 2px;
+}
+.profileImage{
+    border-radius: 50px;
+    border: 1px solid #f0f0f0;
+    width: 45px;
+    height: 45px;
 }
 </style>

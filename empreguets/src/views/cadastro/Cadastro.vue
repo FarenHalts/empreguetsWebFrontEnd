@@ -59,7 +59,16 @@
                         <div class="row form-row" style="justify-content: center;">
                             <div class="roundedAvatar">
                                 <img src="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/user.png?alt=media&token=65caf39f-546f-4a36-8c71-638e7d265197" height="100" width="100">
-
+                                <input class="styleUpload" type="file" @change="previewImage" accept="image/jpeg">
+                                    <img class="preview" :src="picture" v-if="picture">
+                                    <el-button v-if="!imageData" disabled size="mini" round class="styleUploadButton" @click="onUpload">Upload</el-button>
+                                    <el-button style="position: relative; bottom: 95px;" v-else-if="imageData && !picture" size="mini" round class="styleUploadButton" @click="onUpload">Upload</el-button>
+                                <!-- <div>
+                                    <p>
+                                        Progres: {{uploadValue.toFixed()+"%"}}
+                                        <progress :value="uploadValue" max="100"></progress>
+                                    </p>
+                                </div> -->
                             </div>
                             <div class="col-12 col-sm-6 col-md-5 col-xl-5">
                                 <div class="row">
@@ -118,7 +127,16 @@
                         <div class="row form-row" style="justify-content: center;">
                             <div class="roundedAvatar">
                                 <img src="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/user.png?alt=media&token=65caf39f-546f-4a36-8c71-638e7d265197" height="100" width="100">
-
+                                <input class="styleUpload" type="file" @change="previewImage" accept="image/jpeg">
+                                    <img class="preview" :src="picture" v-if="picture">
+                                    <el-button v-if="!imageData" disabled size="mini" round class="styleUploadButton" @click="onUpload">Upload</el-button>
+                                    <el-button style="position: relative; bottom: 95px;" v-else-if="imageData && !picture" size="mini" round class="styleUploadButton" @click="onUpload">Upload</el-button>
+                                <!-- <div>
+                                    <p>
+                                        Progres: {{uploadValue.toFixed()+"%"}}
+                                        <progress :value="uploadValue" max="100"></progress>
+                                    </p>
+                                </div> -->
                             </div>
                             <div class="col-12 col-sm-6 col-md-5 col-xl-5">
                                 <div class="row">
@@ -148,6 +166,7 @@
 
 <script>
 import Api from './cadastroService'
+import firebase from 'firebase'
 export default {
     data() {
         return {
@@ -328,7 +347,10 @@ export default {
                 }, ],
             },
             latitude: '',
-            longitude: ''
+            longitude: '',
+            imageData: null,
+            picture: null,
+            uploadValue: 0
         }
     },
     watch: {
@@ -377,77 +399,91 @@ export default {
             }
         },
         registerPrestador(form) {
-            let unformatValue = form.valor.replaceAll('R$', '');
-            let data = {
-                nome: form.nome,
-                email: form.email,
-                senha: form.senha,
-                telefone: form.telefone,
-                cep: form.cep,
-                endereco: form.endereco,
-                bairro: form.bairro,
-                num_endereco: form.numeroendereco,
-                complemento: form.complemento,
-                foto: 'https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/dona%20zilda.png?alt=media&token=fa868b06-ed3d-4772-9b52-cc47354d7edc',
-                tipo_usuario: this.tipoCadastro,
-                cpf: form.cpf,
-                rg: form.rg,
-                data_nascimento: form.datanascimento,
-                valor_servico: unformatValue,
-                raio: form.raio,
-                descricao_perfil: 'Eu amo meus netinhos, não lavo louça, só seco',
-                lat: this.latitude,
-                lng: this.longitude
-            }
-            Api.registerPrestador(data).then(response => {
-                if (response.data.status == 'SUCCESS') {
-                    this.$message({
-                        message: response.data.message,
-                        type: "success",
-                    });
-                    this.$router.push('/login')
+            if (this.picture) {
+                let unformatValue = form.valor.replaceAll('R$', '');
+                let data = {
+                    nome: form.nome,
+                    email: form.email,
+                    senha: form.senha,
+                    telefone: form.telefone,
+                    cep: form.cep,
+                    endereco: form.endereco,
+                    bairro: form.bairro,
+                    num_endereco: form.numeroendereco,
+                    complemento: form.complemento,
+                    foto: this.picture,
+                    tipo_usuario: this.tipoCadastro,
+                    cpf: form.cpf,
+                    rg: form.rg,
+                    data_nascimento: form.datanascimento,
+                    valor_servico: unformatValue,
+                    raio: form.raio,
+                    descricao_perfil: 'Eu amo meus netinhos, não lavo louça, só seco',
+                    lat: this.latitude,
+                    lng: this.longitude
                 }
-            }).catch(err => {
+                Api.registerPrestador(data).then(response => {
+                    if (response.data.status == 'SUCCESS') {
+                        this.$message({
+                            message: response.data.message,
+                            type: "success",
+                        });
+                        this.$router.push('/login')
+                    }
+                }).catch(err => {
+                    this.$message({
+                        message: err.response.data.message,
+                        type: "error",
+                    });
+                })
+            } else {
                 this.$message({
-                    message: err.response.data.message,
+                    message: 'Insira uma imagem de perfil!',
                     type: "error",
                 });
-            })
+            }
         },
         registerSolicitador(form) {
-            let unformatValue = form.valorpj.replaceAll('R$', '');
-            let data = {
-                nome: form.nomepj,
-                email: form.emailpj,
-                senha: form.senhapj,
-                telefone: form.telefonepj,
-                cep: form.ceppj,
-                endereco: form.enderecopj,
-                bairro: form.bairropj,
-                num_endereco: form.numeroenderecopj,
-                complemento: form.complementopj,
-                foto: 'https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/chester.png?alt=media&token=1b9467f1-33d8-4ad8-bd15-e2d8442c7278',
-                tipo_usuario: this.tipoCadastro,
-                documento: form.documentopj,
-                valor_servico: unformatValue,
-                descricao_perfil: 'Não estarei em casa',
-                lat: this.latitude,
-                lng: this.longitude
-            }
-            Api.registerSolicitador(data).then(response => {
-                if (response.data.status == 'SUCCESS') {
-                    this.$message({
-                        message: response.data.message,
-                        type: "success",
-                    });
-                    this.$router.push('/login')
+            if (this.picture) {
+                let unformatValue = form.valorpj.replaceAll('R$', '');
+                let data = {
+                    nome: form.nomepj,
+                    email: form.emailpj,
+                    senha: form.senhapj,
+                    telefone: form.telefonepj,
+                    cep: form.ceppj,
+                    endereco: form.enderecopj,
+                    bairro: form.bairropj,
+                    num_endereco: form.numeroenderecopj,
+                    complemento: form.complementopj,
+                    foto: this.picture,
+                    tipo_usuario: this.tipoCadastro,
+                    documento: form.documentopj,
+                    valor_servico: unformatValue,
+                    descricao_perfil: 'Não estarei em casa',
+                    lat: this.latitude,
+                    lng: this.longitude
                 }
-            }).catch(err => {
+                Api.registerSolicitador(data).then(response => {
+                    if (response.data.status == 'SUCCESS') {
+                        this.$message({
+                            message: response.data.message,
+                            type: "success",
+                        });
+                        this.$router.push('/login')
+                    }
+                }).catch(err => {
+                    this.$message({
+                        message: err.response.data.message,
+                        type: "error",
+                    });
+                })
+            } else {
                 this.$message({
-                    message: err.response.data.message,
+                    message: 'Insira uma imagem de perfil!',
                     type: "error",
                 });
-            })
+            }
         },
         getLatLngPrest(){
             let ruaNoCharac = this.ruleForm.endereco.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -478,6 +514,24 @@ export default {
                     this.registerSolicitador(this.ruleFormPJ)
                 }
             })
+        },
+        previewImage(event){
+            this.uploadValue=0;
+            this.picture=null;
+            this.imageData=event.target.files[0]
+        },
+        onUpload(){
+            this.picture=null;
+            const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+            storageRef.on(`state_changed`,snapshot=> {
+                this.uploadValue=(snapshot.bytesTransferred/snapshot.totalBytes)*100;
+            }, error=>{console.log(error.message)},
+            ()=>{this.uploadValue=100;
+            storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+                this.picture=url;
+            });
+            }
+            );
         }
     }
 }
@@ -565,5 +619,29 @@ export default {
         top: 0 !important;
         bottom: 0 !important;
     }
+}
+img.preview{
+    position: relative;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    left: 0px;
+    border-radius: 100px;
+    bottom: 200px;
+}
+.styleUpload{
+    opacity: 0;
+    position: relative;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    left: 0px;
+    border-radius: 100px;
+    bottom: 100px;
+}
+.styleUploadButton{
+    position: relative;
+    bottom: 95px;
+    left: 17px;
 }
 </style>
