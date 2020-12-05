@@ -61,8 +61,6 @@
                                 <img src="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/user.png?alt=media&token=65caf39f-546f-4a36-8c71-638e7d265197" height="100" width="100">
                                 <input class="styleUpload" type="file" @change="previewImage" accept="image/jpeg">
                                     <img class="preview" :src="picture" v-if="picture">
-                                    <el-button v-if="!imageData" disabled size="mini" round class="styleUploadButton" @click="onUpload">Upload</el-button>
-                                    <el-button style="position: relative; bottom: 95px;" v-else-if="imageData && !picture" size="mini" round class="styleUploadButton" @click="onUpload">Upload</el-button>
                                 <!-- <div>
                                     <p>
                                         Progres: {{uploadValue.toFixed()+"%"}}
@@ -129,8 +127,6 @@
                                 <img src="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/user.png?alt=media&token=65caf39f-546f-4a36-8c71-638e7d265197" height="100" width="100">
                                 <input class="styleUpload" type="file" @change="previewImage" accept="image/jpeg">
                                     <img class="preview" :src="picture" v-if="picture">
-                                    <el-button v-if="!imageData" disabled size="mini" round class="styleUploadButton" @click="onUpload">Upload</el-button>
-                                    <el-button style="position: relative; bottom: 95px;" v-else-if="imageData && !picture" size="mini" round class="styleUploadButton" @click="onUpload">Upload</el-button>
                                 <!-- <div>
                                     <p>
                                         Progres: {{uploadValue.toFixed()+"%"}}
@@ -519,6 +515,7 @@ export default {
             this.uploadValue=0;
             this.picture=null;
             this.imageData=event.target.files[0]
+            this.onUpload();
         },
         onUpload(){
             this.picture=null;
