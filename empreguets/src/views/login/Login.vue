@@ -75,6 +75,7 @@ export default {
 
     },
     created() {
+        this.logg();
         if (this.$store.getters.authenticated == false) {
             this.$message({
                 message: 'Token inválido ou usuário sem permissão!',
@@ -140,6 +141,9 @@ export default {
                     type: "error",
                 });
             })
+        },
+        logg(){
+            console.log('refiz 2')
         }
     },
 

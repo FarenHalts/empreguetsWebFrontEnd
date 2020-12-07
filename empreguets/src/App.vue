@@ -1,5 +1,8 @@
 <template>
 <div id="app">
+    <!-- <head>
+         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    </head> -->
     <headerEmp v-if="renderApp">
     </headerEmp>
     <router-view />

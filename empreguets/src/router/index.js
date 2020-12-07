@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import store from '../store/index.js'
 import axios from 'axios'
 import Home from '../views/Home.vue'
-import TelaInicial from '../views/telainicial/TelaInicial.vue'
 import Login from '../views/login/Login.vue'
 import Cadastro from '../views/cadastro/Cadastro.vue'
 import homeScreen from '../views/homeScreen/homeScreen.vue'
@@ -16,16 +15,11 @@ import meuPerfil from '../views/meuPerfil/meuPerfil.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: "/",
-  //   redirect: {
-  //     name: "Login"
-  //   }
-  // },
   {
-    path: '/telainicial',
-    name: 'telainicial',
-    component: TelaInicial
+    path: "/",
+    redirect: {
+      name: "Login"
+    }
   },
   {
     path: '/Home',
@@ -44,8 +38,13 @@ const routes = [
   },
   {
     path: '*',
-    name: 'telainicial',
-    component: TelaInicial
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/home',
