@@ -9,7 +9,7 @@
                 <el-input placeholder="Digite a região" v-model="search" suffix-icon="el-icon-search"></el-input>
             </div>
         </div> -->
-        <div class="row justify-content-center" style="padding-top: 50px">
+        <div class="row justify-content-center" style="padding-top: 20px">
             <GmapMap
                 class="mapStyle"
                 :center="{lat:-25.5065, lng:-49.2641}"
@@ -27,6 +27,26 @@
             </GmapMap>
 
         </div>
+            <div class="row" style="justify-content: center;" v-if="this.canShowCard == true">
+            <div @click="sendToProfile(user)">
+                <el-card class="cards">
+                    <img :src="user.foto" class="image" />
+                    <div style="padding: 14px">
+                        <div class="row" style="justify-content: space-between; padding: 0px 2px">
+                            <h3 class="titleCards">{{ returnName(user.nome) }}</h3>
+                            <el-rate v-model="user.avaliacao_media" disabled disabled-void-color="#f0f0f0" :colors="colors">
+                            </el-rate>
+                        </div>
+                        <div class="row" style="justify-content: space-between; padding: 0px 2px">
+                            <h3 class="subTitleCards">{{ user.bairro }}</h3>
+                            <h3 class="subTitleCards">
+                                {{ "R$" + user.valor_servico + "/Diária" }}
+                            </h3>
+                        </div>
+                    </div>
+                </el-card>
+            </div>
+        </div>
     </div>
 </div>
 </template>
@@ -42,7 +62,10 @@ export default {
                 //     position: { lat: -25.518119054649656, lng: -49.255530194461585 },
                 //     user: {nome: 3}
                 // }
-            ]
+            ],
+            user: [],
+            colors: ["#FFC857", " #FFC857", " #FFC857"],
+            canShowCard: false
         }
     },
     created() {
@@ -50,7 +73,23 @@ export default {
     },
     methods: {
         logItem(item){
-            console.log(item)
+            console.log(item);
+            let id = item.id_usuario
+            if (this.$store.getters.userData.tipo_usuario == "Solicitador") {
+                Api.getOnePrestador(id, localStorage.getItem("token")).then(response => {
+                    if (response.status == 200) {
+                        this.user = response.data.data
+                        this.canShowCard = true
+                    }
+                })
+            } else {
+                Api.getOneSolicitador(id, localStorage.getItem("token")).then(response => {
+                    if (response.status == 200) {
+                        this.user = response.data.data
+                        this.canShowCard = true
+                    }
+                })
+            }
         },
         getLocalizations(){
             if (this.$store.getters.userData.tipo_usuario == "Solicitador") {
@@ -82,16 +121,45 @@ export default {
             } else {
                 return "Solicitadores"
             }
-        }
+        },
+        returnName(name){
+            let convertedName = name.replace(/([a-z]+) .* ([a-z]+)/i, "$1 $2");
+            return convertedName
+        },
+        sendToProfile(data) {
+            this.$store.commit("SET_PROFILE_DATA", data);
+            this.$router.push("/perfil");
+        },
     }
 }
 </script>
 
 <style scoped>
 .mapStyle{
-       width: 600px;
+    width: 600px;
     height: 400px;
     border: 6px solid white;
     border-radius: 8px;
+}
+.subTitleCards {
+    font-family: LobsterRegular;
+    font-size: 16px;
+    color: #f0f0f0;
+    padding-left: 5px;
+}
+.titleCards {
+    font-family: LobsterRegular;
+    font-size: 19px;
+    color: #f0f0f0;
+    padding-left: 5px;
+}
+.cards {
+    margin: 20px 15px 0px 15px;
+}
+.image {
+    width: 100%;
+    display: block;
+    width: 231px;
+    height: 237px;
 }
 </style>
