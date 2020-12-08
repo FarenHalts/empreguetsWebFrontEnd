@@ -1,7 +1,7 @@
 <template>
 <div class="home">
     <div class="container-fluid">
-        <h1 class="bestRatings">Prestadores melhores avaliados de Curitiba</h1>
+        <h1 class="bestRatings">{{typeUser()+" melhores avaliados de Curitiba"}}</h1>
         <div class="row" style="justify-content: center">
             <div v-for="(item, index) in dataTopUsers" :key="index" @click="sendToProfile(item)">
                 <el-card class="cards">
@@ -23,9 +23,9 @@
             </div>
         </div>
         <div class="searchAroundDiv">
-            <span class="searchAround" @click="$router.push('/localizacao')">Pesquise também por prestadores próximos a você</span>
+            <span class="searchAround" @click="$router.push('/localizacao')">{{"Pesquise também por " + typeUser() + " próximos a você"}}</span>
         </div>
-        <h1 class="bestRatings">Demais Prestadores em Curitiba</h1>
+        <h1 class="bestRatings">{{"Demais " + typeUser() + " em Curitiba"}}</h1>
         <div class="row" style="justify-content: center; margin-bottom: 5%">
             <div v-for="(item, index) in dataUsers" :key="index" @click="sendToProfile(item)">
                 <el-card class="cards">
@@ -136,6 +136,13 @@ export default {
                 }
             })
         },
+        typeUser(){
+            if (this.$store.getters.userData.tipo_usuario == "Solicitador") {
+                return "Prestadores"
+            } else {
+                return "Solicitadores"
+            }
+        }
     },
 };
 </script>

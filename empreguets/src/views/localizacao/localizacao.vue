@@ -2,7 +2,7 @@
 <div class="container-fluid localizacao invisibleInputs">
     <div>
         <div>
-            <h1 class="title text-center">Pesquisar por prestadores de serviço próximos a sua localização</h1>
+            <h1 class="title text-center">{{"Pesquisar por " + typeUser() + " de serviço próximos a sua localização"}}</h1>
         </div>
         <div class="row justify-content-center pt-4">
             <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-5">
@@ -74,6 +74,13 @@ export default {
                         })
                     }
                 })
+            }
+        },
+        typeUser(){
+            if (this.$store.getters.userData.tipo_usuario == "Solicitador") {
+                return "Prestadores"
+            } else {
+                return "Solicitadores"
             }
         }
     }
