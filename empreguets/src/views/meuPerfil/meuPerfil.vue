@@ -152,7 +152,7 @@
     <el-dialog title="Editar Perfil" :visible.sync="editDiloag" width="70%" class="editDialog" v-else-if="this.$store.getters.userData.tipo_usuario == 'Solicitador'">
         <div class="row">
             <div class="edit">
-                <el-form :model="ruleFormPJ" :rules="rulespj" ref="rulespj" class="demo-ruleForm form-row">
+                <el-form :model="ruleFormPJ" :rules="rulespj" ref="ruleFormPJ" class="demo-ruleForm form-row">
                     <el-form-item class="col-xl-8" label="Nome Completo" prop="nomepj">
                         <el-input v-model="ruleFormPJ.nomepj"></el-input>
                     </el-form-item>
