@@ -395,7 +395,6 @@ export default {
             }
         },
         registerPrestador(form) {
-            if (this.picture) {
                 let unformatValue = form.valor.replaceAll('R$', '');
                 let data = {
                     nome: form.nome,
@@ -432,12 +431,6 @@ export default {
                         type: "error",
                     });
                 })
-            } else {
-                this.$message({
-                    message: 'Insira uma imagem de perfil!',
-                    type: "error",
-                });
-            }
         },
         registerSolicitador(form) {
             if (this.picture) {
@@ -482,34 +475,62 @@ export default {
             }
         },
         getLatLngPrest(){
-            let ruaNoCharac = this.ruleForm.endereco.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            let adressData = {
-                cep: this.ruleForm.cep.replaceAll('-', ''),
-                num: this.ruleForm.numeroendereco,
-                rua: ruaNoCharac.replaceAll(' ', "+")
-            }
-            Api.getLatLngPrest(adressData).then(response => {
-                if (response.status == 200) {
-                    this.longitude = response.data.features[0].geometry.coordinates[0];
-                    this.latitude = response.data.features[0].geometry.coordinates[1];
-                    this.registerPrestador(this.ruleForm)
+            if (!this.picture) {
+                this.$message({
+                    message: 'Insira uma imagem de perfil!',
+                    type: "error",
+                });
+            } else {
+                let ruaNoCharac = this.ruleForm.endereco.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                let adressData = {
+                    cep: this.ruleForm.cep.replaceAll('-', ''),
+                    num: this.ruleForm.numeroendereco,
+                    rua: ruaNoCharac.replaceAll(' ', "+")
                 }
-            })
+                Api.getLatLngPrest(adressData).then(response => {
+                    if (response.status == 200) {
+                        if (response.data.features.length == 0) {
+                            this.$message({
+                                message: 'Insira um endereço válido!',
+                                type: "error",
+                            });
+                        } else {
+                            this.longitude = response.data.features[0].geometry.coordinates[0];
+                            this.latitude = response.data.features[0].geometry.coordinates[1];
+                            this.registerPrestador(this.ruleForm)
+                        }
+                    }
+                })
+            }
         },
         getLatLngSoli(){
-            let ruaNoCharac = this.ruleFormPJ.enderecopj.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            let adressData = {
-                cep: this.ruleFormPJ.ceppj.replaceAll('-', ''),
-                num: this.ruleFormPJ.numeroenderecopj,
-                rua: ruaNoCharac.replaceAll(' ', "+")
-            }
-            Api.getLatLngPrest(adressData).then(response => {
-                if (response.status == 200) {
-                    this.longitude = response.data.features[0].geometry.coordinates[0];
-                    this.latitude = response.data.features[0].geometry.coordinates[1];
-                    this.registerSolicitador(this.ruleFormPJ)
+            if (!this.picture) {
+                this.$message({
+                    message: 'Insira uma imagem de perfil!',
+                    type: "error",
+                });
+            } else {
+                let ruaNoCharac = this.ruleFormPJ.enderecopj.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                let adressData = {
+                    cep: this.ruleFormPJ.ceppj.replaceAll('-', ''),
+                    num: this.ruleFormPJ.numeroenderecopj,
+                    rua: ruaNoCharac.replaceAll(' ', "+")
                 }
-            })
+                Api.getLatLngPrest(adressData).then(response => {
+                    if (response.status == 200) {
+                        if (response.data.features.length == 0) {
+                            this.$message({
+                                message: 'Insira um endereço válido!',
+                                type: "error",
+                            });
+                        } else {
+                            this.longitude = response.data.features[0].geometry.coordinates[0];
+                            this.latitude = response.data.features[0].geometry.coordinates[1];
+                            this.registerSolicitador(this.ruleFormPJ)
+                        }
+                    }
+                })
+            }
         },
         previewImage(event){
             this.uploadValue=0;
