@@ -8,7 +8,7 @@
                     <img :src="item.foto" class="image" />
                     <div style="padding: 14px">
                         <div class="row" style="justify-content: space-between; padding: 0px 2px">
-                            <h3 class="titleCards">{{ item.nome }}</h3>
+                            <h3 class="titleCards">{{ returnName(item.nome) }}</h3>
                             <el-rate v-model="item.avaliacao_media" disabled disabled-void-color="#f0f0f0" :colors="colors">
                             </el-rate>
                         </div>
@@ -32,7 +32,7 @@
                     <img :src="item.foto" class="image" />
                     <div style="padding: 14px">
                         <div class="row" style="justify-content: space-between; padding: 0px 2px">
-                            <h3 class="titleCards">{{ item.nome }}</h3>
+                            <h3 class="titleCards">{{ returnName(item.nome) }}</h3>
                             <el-rate v-model="item.avaliacao_media" disabled disabled-void-color="#f0f0f0" :colors="colors">
                             </el-rate>
                         </div>
@@ -142,6 +142,10 @@ export default {
             } else {
                 return "Solicitadores"
             }
+        },
+        returnName(name){
+            let convertedName = name.replace(/([a-z]+) .* ([a-z]+)/i, "$1 $2");
+            return convertedName
         }
     },
 };

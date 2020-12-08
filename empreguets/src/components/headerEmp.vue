@@ -15,8 +15,8 @@
                 </div>
                 <div>
                     <el-popover style="cursor: pointer">
-                        <div @click="$router.push('/historico')">
-                            <div class="profileMenuTitle">{{this.$store.getters.userData.nome}}</div>
+                        <div @click="$router.push('/meuperfil')">
+                            <div class="profileMenuTitle">{{(returnName(this.$store.getters.userData.nome))}}</div>
                         </div>
                         <div @click="$router.push('/meuperfil')">
                             <div class="profileMenu"><i class="el-icon-user menuIcons"></i>
@@ -163,6 +163,10 @@ export default {
         logout() {
             localStorage.clear();
             this.$router.push('/login')
+        },
+        returnName(name){
+            let convertedName = name.replace(/([a-z]+) .* ([a-z]+)/i, "$1 $2");
+            return convertedName
         }
     }
 }
