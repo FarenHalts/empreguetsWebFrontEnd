@@ -4,11 +4,11 @@
         <div>
             <h1 class="title text-center">{{"Pesquisar por " + typeUser() + " de serviço próximos a sua localização"}}</h1>
         </div>
-        <div class="row justify-content-center pt-4">
+        <!-- <div class="row justify-content-center pt-4">
             <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-5">
                 <el-input placeholder="Digite a região" v-model="search" suffix-icon="el-icon-search"></el-input>
             </div>
-        </div>
+        </div> -->
         <div class="row justify-content-center" style="padding-top: 50px">
             <GmapMap
                 class="mapStyle"
@@ -22,7 +22,7 @@
                     :position="m"
                     :clickable="true"
                     @click="logItem(m)"
-                    icon="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/icons%2Fplaceholder.png?alt=media&token=b001d7e8-19f2-407f-880a-ae0656f05d72" 
+                    icon="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/icons%2Fpin.png?alt=media&token=39914f6e-ea6b-4ada-a2a2-82e6ed6375b1" 
                 />
             </GmapMap>
 

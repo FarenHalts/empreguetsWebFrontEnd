@@ -13,7 +13,8 @@
                 <el-rate v-model="value" class="alignStarts" disabled disabled-void-color="#f0f0f0" :colors="colors">
                 </el-rate>
                 <div>
-                    <i class="el-icon-edit penStyle" @click="openModal()"></i>
+                    <i class="el-icon-edit penStyle" @click="openPrestadorModal()" v-if="this.$store.getters.userData.tipo_usuario == 'Prestador'"></i>
+                    <i class="el-icon-edit penStyle" @click="openSolicitadorModal()" v-else></i>
                 </div>
             </div>
             <div class="labelsProfile">
@@ -156,7 +157,7 @@
                         <el-input v-model="ruleFormPJ.nomepj"></el-input>
                     </el-form-item>
                     <el-form-item class="col-xl-4" label="CPF/CNPJ" prop="documentopj">
-                        <el-input v-mask="['###.###.###-##', '##.###.###/####-##']" v-model="ruleFormPJ.documentopj"></el-input>
+                        <el-input disabled v-mask="['###.###.###-##', '##.###.###/####-##']" v-model="ruleFormPJ.documentopj"></el-input>
                     </el-form-item>
                     <el-form-item class="col-6 col-sm-6 col-md-4 col-lg-6 col-xl-3" label="Telefone" prop="telefonepj">
                         <el-input v-mask="['(##) ####-####', '(##) #####-####']" v-model="ruleFormPJ.telefonepj"></el-input>
@@ -173,13 +174,13 @@
                     <!-- <el-form-item class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4" label="Cidade" prop="cidadepj">
                         <el-input v-model="ruleFormPJ.cidadepj"></el-input>
                     </el-form-item> -->
-                    <el-form-item class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-5" label="Complemento" prop="complementopj">
+                    <el-form-item class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3" label="Complemento" prop="complementopj">
                         <el-input v-model="ruleFormPJ.complementopj"></el-input>
                     </el-form-item>
-                    <el-form-item class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-6" label="Valor serviço" prop="valorpj">
+                    <el-form-item class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3" label="Valor serviço" prop="valorpj">
                         <el-input v-mask="['R$###', 'R$##']" v-model="ruleFormPJ.valorpj"></el-input>
                     </el-form-item>
-                    <el-form-item class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" label="Bairro" prop="bairropj">
+                    <el-form-item class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-3" label="Bairro" prop="bairropj">
                         <el-input v-model="ruleFormPJ.bairropj"></el-input>
                     </el-form-item>
                     <div class="container">
@@ -192,7 +193,7 @@
                                     <el-form-item class="col-12 col-sm-12 col-md-12 col-xl-12" label="Email" prop="emailpj">
                                         <el-input v-model="ruleFormPJ.emailpj"></el-input>
                                     </el-form-item>
-                                    <el-form-item class="col-sm-12 col-md-12 col-xl-12" label="Senha" prop="senhapj">
+                                    <el-form-item class="col-sm-12 col-md-12 col-xl-12" label="Alterar senha" prop="senhapj">
                                         <el-input type="password" v-model="ruleFormPJ.senhapj"></el-input>
                                     </el-form-item>
                                 </div>
@@ -214,6 +215,7 @@
 import api from "./selfProfileService";
 import cep from "../cadastro/cadastroService";
 import moment from "moment";
+import cadastroApi from "../cadastro/cadastroService"
 export default {
     data() {
         return {
@@ -356,11 +358,11 @@ export default {
                     message: "E-mail inválido.",
                     // trigger: 'blur'
                 }, ],
-                senhapj: [{
-                    required: true,
-                    message: "Senha inválida.",
-                    // trigger: 'blur'
-                }, ],
+                // senhapj: [{
+                //     required: true,
+                //     message: "Senha inválida.",
+                //     // trigger: 'blur'
+                // }, ],
                 telefonepj: [{
                     required: true,
                     message: "Número inválido.",
@@ -404,6 +406,8 @@ export default {
             },
             colors: ["#FFC857", " #FFC857", " #FFC857"],
             modalKey: 0,
+            latitude: '',
+            longitude: ''
         };
     },
     created() {
@@ -440,21 +444,23 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.updatePrestador(this.ruleForm);
+                    // this.updatePrestador(this.ruleForm);
+                    this.getLatLngPrest();
                 } else {
                     return false;
                 }
             });
         },
         submitFormPJ(formName) {
-            this.updateSolicitador(this.$store.getters.userData);
-            // this.$refs[formName].validate((valid) => {
-            //     if (valid) {
-            //         this.updateSolicitador(this.$store.getters.userData)
-            //     } else {
-            //         return false;
-            //     }
-            // });
+            // this.updateSolicitador(this.ruleFormPJ);
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.getLatLngSoli();
+                    // this.updateSolicitador(this.$store.getters.userData)
+                } else {
+                    return false;
+                }
+            });
         },
         updatePrestador(form) {
             let unformatCpf = form.cpf.replace(/[^\w\s]/gi, "");
@@ -486,6 +492,8 @@ export default {
                 valor_servico: unformatValue,
                 raio: unformatDistance,
                 id_usuario: this.$store.getters.userData.id_usuario.toString(),
+                lat: this.latitude,
+	            lng: this.longitude
             };
             api
                 .updatePrestador(data, localStorage.getItem("token"))
@@ -507,36 +515,50 @@ export default {
                 });
         },
         updateSolicitador(form) {
-            // let data = {
-            //     nome: form.nomepj,
-            //     email: form.emailpj,
-            //     senha: form.senhapj,
-            //     telefone: form.telefonepj,
-            //     cep: form.ceppj,
-            //     endereco: form.enderecopj,
-            //     bairro: form.bairropj,
-            //     num_endereco: form.numeroenderecopj,
-            //     complemento: form.complementopj,
-            //     foto: form.foto,
-            //     tipo_usuario: this.tipoCadastro,
-            //     documento: form.documentopj,
-            //     valor_servico: form.valorpj,
-            //     descricao_perfil: ''
-            // }
-            // Api.registerSolicitador(data).then(response => {
-            //     if (response.data.status == 'SUCCESS') {
-            //         this.$message({
-            //             message: response.data.message,
-            //             type: "success",
-            //         });
-            //         this.$router.push('/login')
-            //     }
-            // }).catch(err => {
-            //     this.$message({
-            //         message: err.response.data.message,
-            //         type: "error",
-            //     });
-            // })
+            let unformatCpf = form.documentopj.replace(/[^\w\s]/gi, "");
+            let unformatCep = form.ceppj.replace(/[^\w\s]/gi, "");
+            let unformatValue = form.valorpj.replaceAll("R$", "");
+            let password = "";
+            if (form.senhapj) {
+                password = form.senhapj;
+            }
+            let data = {
+                nome: form.nomepj,
+                email: form.emailpj,
+                senha: password,
+                telefone: form.telefonepj,
+                cep: unformatCep,
+                endereco: form.enderecopj,
+                bairro: form.bairropj,
+                num_endereco: form.numeroenderecopj,
+                complemento: form.complementopj,
+                foto: form.foto,
+                tipo_usuario: this.$store.getters.userData.tipo_usuario,
+                documento: unformatCpf,
+                valor_servico: unformatValue,
+                descricao_perfil: '',
+                id_usuario: this.$store.getters.userData.id_usuario.toString(),
+                lat: this.latitude,
+	            lng: this.longitude
+            }
+                api
+                .updateSolicitador(data, localStorage.getItem("token"))
+                .then((response) => {
+                    if (response.data.status == "SUCCESS") {
+                        this.$message({
+                            message: response.data.message,
+                            type: "success",
+                        });
+                        this.editDiloag = false;
+                        location.reload();
+                    }
+                })
+                .catch((err) => {
+                    this.$message({
+                        message: err.response.data.message,
+                        type: "error",
+                    });
+                });
         },
         searchCEP() {
             if (/\d{5}\-\d{3}/.test(this.ruleForm.cep)) {
@@ -556,7 +578,7 @@ export default {
                 });
             }
         },
-        openModal() {
+        openPrestadorModal() {
             let data = this.$store.getters.userData;
             let re = /^([\d]{5})\-?([\d]{3})/;
             let cepFormated = data.cep.replace(re, "$1.$2");
@@ -583,6 +605,67 @@ export default {
             (this.ruleForm.raio = data.raio + "Km"),
             (this.ruleForm.descricao_perfil = "");
             this.editDiloag = true;
+        },
+        openSolicitadorModal(){
+            let data = this.$store.getters.userData;
+            this.ruleFormPJ.nomepj = data.nome,
+            this.ruleFormPJ.emailpj = data.email,
+            this.ruleFormPJ.telefonepj = data.telefone,
+            this.ruleFormPJ.ceppj = data.cep,
+            this.ruleFormPJ.enderecopj = data.endereco,
+            this.ruleFormPJ.bairropj = data.bairro,
+            this.ruleFormPJ.numeroenderecopj = data.num_endereco,
+            this.ruleFormPJ.complementopj = data.complemento,
+            this.ruleFormPJ.foto = data.foto,
+            this.ruleFormPJ.tipo_usuario = data.tipo_usuario,
+            this.ruleFormPJ.documentopj = data.documento,
+            this.ruleFormPJ.valorpj = data.valor_servico,
+            this.ruleFormPJ.descricao_perfil = data.descricao_perfil,
+            this.editDiloag = true;
+        },
+        getLatLngSoli(){
+            let ruaNoCharac = this.ruleFormPJ.enderecopj.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            let adressData = {
+                cep: this.ruleFormPJ.ceppj.replaceAll('-', ''),
+                num: this.ruleFormPJ.numeroenderecopj,
+                rua: ruaNoCharac.replaceAll(' ', "+")
+            }
+            cadastroApi.getLatLngPrest(adressData).then(response => {
+                if (response.status == 200) {
+                    if (response.data.features.length == 0) {
+                        this.$message({
+                            message: 'Insira um endereço válido!',
+                            type: "error",
+                        });
+                    } else {
+                        this.longitude = response.data.features[0].geometry.coordinates[0];
+                        this.latitude = response.data.features[0].geometry.coordinates[1];
+                        this.updateSolicitador(this.ruleFormPJ);
+                    }
+                }
+            })
+        },
+        getLatLngPrest(){
+            let ruaNoCharac = this.ruleForm.endereco.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            let adressData = {
+                cep: this.ruleForm.cep.replaceAll('-', ''),
+                num: this.ruleForm.numeroendereco,
+                rua: ruaNoCharac.replaceAll(' ', "+")
+            }
+            cadastroApi.getLatLngPrest(adressData).then(response => {
+                if (response.status == 200) {
+                    if (response.data.features.length == 0) {
+                        this.$message({
+                            message: 'Insira um endereço válido!',
+                            type: "error",
+                        });
+                    } else {
+                        this.longitude = response.data.features[0].geometry.coordinates[0];
+                        this.latitude = response.data.features[0].geometry.coordinates[1];
+                        this.updatePrestador(this.ruleForm)
+                    }
+                }
+            })
         },
     },
 };

@@ -8,4 +8,7 @@ export default class Api{
     static async updatePrestador(obj, auth){
         return await axios.put(`${process.env.VUE_APP_BASEURL}/prestador`, obj ,{headers: {authorization: auth}})
     }
+    static async updateSolicitador(obj, auth){
+        return await axios.put(`${process.env.VUE_APP_BASEURL}/solicitador`, obj ,{headers: {authorization: auth}})
+    }
 }
