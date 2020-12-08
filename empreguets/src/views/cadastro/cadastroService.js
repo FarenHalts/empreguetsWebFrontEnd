@@ -15,7 +15,10 @@ export default class Api{
     static async registerSolicitador(data){
         return await axios.post(`${process.env.VUE_APP_BASEURL}/solicitador`, data)
     }
+    // static async getLatLngPrest(adressData){
+    //     return await axios.get(`https://photon.komoot.io/api?lang=en&limit=1&q=${adressData.cep}+${adressData.num}+curitiba+${adressData.rua}`)
+    // }
     static async getLatLngPrest(adressData){
-        return await axios.get(`https://photon.komoot.io/api?lang=en&limit=1&q=${adressData.cep}+${adressData.num}+curitiba+${adressData.rua}`)
+        return await axios.get(`https://photon.komoot.io/api?lang=en&limit=1&q=${adressData.rua}+${adressData.num}+curitiba`)
     }
 }

@@ -43,7 +43,9 @@
                 </div>
             </div>
             <div class="services">
-                <span>Já efetuou 9 serviços pela empreguets.</span>
+                <span v-if="this.servicos == 1">{{"Já efetuou " + this.servicos + " serviço pela empreguets."}}</span>
+                <span v-else-if="this.servicos > 0">{{"Já efetuou " + this.servicos + " serviços pela empreguets."}}</span>
+                <span v-else>{{"Nenhum serviço efetuado pela empreguets."}}</span>
             </div>
             <div class="mt-2">
                 <el-button type="primary" @click="dialogVisible = true">Marcar Serviço<i class="el-icon-date" style="padding-left: 10px"></i></el-button>
@@ -131,6 +133,7 @@ export default {
             foto: "",
             bairro: "",
             valor: "",
+            servicos: '',
             rates: [],
             dialogVisible: false,
             profile: [],
@@ -175,6 +178,7 @@ export default {
             (this.telefone = data.telefone),
             (this.valor = data.valor_servico);
             (this.foto = data.foto);
+            (this.servicos = data.servicos);
         },
         loadRates(id) {
             Api.getRates(id, localStorage.getItem("token")).then((response) => {

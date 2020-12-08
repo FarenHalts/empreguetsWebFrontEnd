@@ -58,7 +58,7 @@
                     <div class="container">
                         <div class="row form-row" style="justify-content: center;">
                             <div class="roundedAvatar">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/user.png?alt=media&token=65caf39f-546f-4a36-8c71-638e7d265197" height="100" width="100">
+                                <img src="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/icons%2Fuser.png?alt=media&token=aeae7e72-4821-4e2f-9862-a7c35ced1e88" height="100" width="100">
                                 <input class="styleUpload" type="file" @change="previewImage" accept="image/jpeg">
                                     <img class="preview" :src="picture" v-if="picture">
                                 <!-- <div>
@@ -124,7 +124,7 @@
                     <div class="container">
                         <div class="row form-row" style="justify-content: center;">
                             <div class="roundedAvatar">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/user.png?alt=media&token=65caf39f-546f-4a36-8c71-638e7d265197" height="100" width="100">
+                                <img src="https://firebasestorage.googleapis.com/v0/b/empreguets-4e2d3.appspot.com/o/icons%2Fuser.png?alt=media&token=aeae7e72-4821-4e2f-9862-a7c35ced1e88" height="100" width="100">
                                 <input class="styleUpload" type="file" @change="previewImage" accept="image/jpeg">
                                     <img class="preview" :src="picture" v-if="picture">
                                 <!-- <div>

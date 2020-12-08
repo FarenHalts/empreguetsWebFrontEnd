@@ -50,7 +50,9 @@
                 </div>
             </div>
             <div class="services">
-                <span>Já efetuou 9 serviços pela empreguets.</span>
+                <span v-if="this.servicos == 1">{{"Já efetuou " + this.servicos + " serviço pela empreguets."}}</span>
+                <span v-else-if="this.servicos > 0">{{"Já efetuou " + this.servicos + " serviços pela empreguets."}}</span>
+                <span v-else>{{"Nenhum serviço efetuado pela empreguets."}}</span>
             </div>
         </div>
     </div>
@@ -407,7 +409,8 @@ export default {
             colors: ["#FFC857", " #FFC857", " #FFC857"],
             modalKey: 0,
             latitude: '',
-            longitude: ''
+            longitude: '',
+            servicos: ''
         };
     },
     created() {
@@ -433,6 +436,7 @@ export default {
             (this.telefone = data.telefone),
             (this.valor = data.valor_servico);
             (this.foto = data.foto);
+            this.servicos = data.servicos
         },
         loadRates(id) {
             api.getRates(id, localStorage.getItem("token")).then((response) => {
