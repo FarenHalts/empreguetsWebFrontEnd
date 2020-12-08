@@ -205,7 +205,7 @@
         </div>
         <span slot="footer" class="dialog-footer">
             <el-button @click="editDiloag = false">Cancelar</el-button>
-            <el-button @click="submitFormPJ('ruleForm')">Salvar</el-button>
+            <el-button @click="submitFormPJ('ruleFormPJ')">Salvar</el-button>
         </span>
     </el-dialog>
 </div>
