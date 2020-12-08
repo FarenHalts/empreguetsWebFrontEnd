@@ -406,7 +406,6 @@ export default {
                     bairro: form.bairro,
                     num_endereco: form.numeroendereco,
                     complemento: form.complemento,
-                    foto: this.picture,
                     tipo_usuario: this.tipoCadastro,
                     cpf: form.cpf,
                     rg: form.rg,
@@ -415,7 +414,8 @@ export default {
                     raio: form.raio,
                     descricao_perfil: 'Eu amo meus netinhos, não lavo louça, só seco',
                     lat: this.latitude,
-                    lng: this.longitude
+                    lng: this.longitude,
+                    foto: this.picture,
                 }
                 Api.registerPrestador(data).then(response => {
                     if (response.data.status == 'SUCCESS') {
@@ -445,13 +445,13 @@ export default {
                     bairro: form.bairropj,
                     num_endereco: form.numeroenderecopj,
                     complemento: form.complementopj,
-                    foto: this.picture,
                     tipo_usuario: this.tipoCadastro,
                     documento: form.documentopj,
                     valor_servico: unformatValue,
                     descricao_perfil: 'Não estarei em casa',
                     lat: this.latitude,
-                    lng: this.longitude
+                    lng: this.longitude,
+                    foto: this.picture,
                 }
                 Api.registerSolicitador(data).then(response => {
                     if (response.data.status == 'SUCCESS') {
